@@ -1,6 +1,7 @@
 <%@page import="in.vishnu.services.DisplayServices"%>
 <%@page import="java.util.List"%>
-<html>
+<!DOCTYPE>
+<html lang="en">
 <head>
 <title>Car Service</title>
 </head>
@@ -9,8 +10,9 @@
 	<main class="container-fluid">
 		<h3>List of Services</h3>
 		<table class = "table table-bordered">
+		<caption>Available Services</caption>
 		<thead>
-		<tr><th>S.no</th> <th>Services</th> <th>Quick Book</th> </tr>
+		<tr><th scope = "col">S.no</th> <th scope = "col">Services</th> <th scope = "col">Quick Book</th> </tr>
 		</thead>
 		<tbody>
 		<% List<String> numberOfServices = DisplayServices.getServices();
