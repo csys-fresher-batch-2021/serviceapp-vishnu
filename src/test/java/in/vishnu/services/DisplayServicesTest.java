@@ -13,9 +13,9 @@ public class DisplayServicesTest {
 	 */
 	@Test
 	public void displayServicesTest() {
-		List<String> numberOFServices = DisplayServices.getServices();
-		System.out.println(numberOFServices);
-		assertEquals(7, numberOFServices.size());
+		List<String> numberOfServices = DisplayServices.getServices();
+		System.out.println(numberOfServices);
+		assertEquals(7, numberOfServices.size());
 	}
 
 }
