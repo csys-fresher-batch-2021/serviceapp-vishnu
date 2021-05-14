@@ -1,6 +1,10 @@
-package in.vishnu.Validation;
+package in.vishnu.validation;
 
 public class ServiceValidation {
+	
+	private ServiceValidation() {
+		//Default Constructor
+	}
 
 	/**
 	 * validates the service name
@@ -9,7 +13,7 @@ public class ServiceValidation {
 	 * @return
 	 */
 	public static boolean stringValidation(String serviceName) {
-		// String service = serviceName.toUpperCase();
+
 		boolean isValidService = true;
 		if (serviceName.length() == 0 || serviceName.trim().equals("")) {
 			isValidService = false;

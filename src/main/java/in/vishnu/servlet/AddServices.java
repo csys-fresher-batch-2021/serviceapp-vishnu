@@ -1,4 +1,4 @@
-package in.vishnu.Servlet;
+package in.vishnu.servlet;
 
 import java.io.IOException;
 
@@ -25,10 +25,10 @@ public class AddServices extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-
+		
 		String newService = request.getParameter("services");
 
 		boolean isAdded = CarServices.addService(newService);

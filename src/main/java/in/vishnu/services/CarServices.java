@@ -3,7 +3,7 @@ package in.vishnu.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import in.vishnu.Validation.ServiceValidation;
+import in.vishnu.validation.ServiceValidation;
 
 public class CarServices {
 
@@ -36,15 +36,14 @@ public class CarServices {
 
 	/**
 	 * this method adds new service
-	 * 
 	 * @param serviceName
 	 * @return
 	 */
 	public static boolean addService(String serviceName) {
 		boolean isAdded = false;
 
-		if (ServiceValidation.stringValidation(serviceName)) {
-
+		if(ServiceValidation.stringValidation(serviceName)) {
+			
 			String service = serviceName.toUpperCase();
 			if (carServicesList.contains(service)) {
 				isAdded = false;

@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import in.vishnu.Validation.ServiceValidation;
+import in.vishnu.validation.ServiceValidation;
 
 public class ServiceValidationTest {
 
