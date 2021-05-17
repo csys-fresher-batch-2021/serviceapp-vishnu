@@ -3,12 +3,14 @@ package in.vishnu.services;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DisplayServices {
-	
-	private DisplayServices() {
-	    //default constructor
-	  }
-	
+import in.vishnu.validation.ServiceValidation;
+
+public class CarServices {
+
+	private CarServices() {
+		// default constructor
+	}
+
 	private static List<String> carServicesList = new ArrayList<>();
 
 	static {
@@ -20,7 +22,7 @@ public class DisplayServices {
 		carServicesList.add("AIR FILTER REPLACEMENT");
 		carServicesList.add("OIL CHANGE");
 		carServicesList.add("OTHER SERVICES");
-		
+
 	}
 
 	/**
@@ -30,6 +32,28 @@ public class DisplayServices {
 	 */
 	public static List<String> getServices() {
 		return carServicesList;
+	}
+
+	/**
+	 * this method adds new service
+	 * @param serviceName
+	 * @return
+	 */
+	public static boolean addService(String serviceName) {
+		boolean isAdded = false;
+
+		if(ServiceValidation.stringValidation(serviceName)) {
+			
+			String service = serviceName.toUpperCase();
+			if (carServicesList.contains(service)) {
+				isAdded = false;
+			} else {
+				carServicesList.add(carServicesList.size() - 1, service);
+				isAdded = true;
+			}
+		}
+
+		return isAdded;
 	}
 
 }
