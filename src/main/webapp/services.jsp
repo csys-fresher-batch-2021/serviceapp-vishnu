@@ -9,6 +9,11 @@
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
 		<h3>List of Services</h3>
+		<%String infoMessage = request.getParameter("message");
+		if (infoMessage != null) {
+			out.println("<font color='green'>" + infoMessage + "</font>");
+		}
+		%>
 		<table class="table table-bordered">
 			<caption>Available Services</caption>
 			<thead>
@@ -16,6 +21,7 @@
 					<th scope="col">S.no</th>
 					<th scope="col">Services</th>
 					<th scope="col">Quick Book</th>
+					<th scope="col"></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -30,6 +36,8 @@
 					<td><%=i%></td>
 					<td><%=service%></td>
 					<td><button type="submit">Book Now</button></td>
+					<td><a href="DeleteServices?serviceName=<%=service %>" class="btn btn-danger">Delete</a></td>
+										
 				</tr>
 
 				<%

@@ -31,13 +31,17 @@ public class AddServices extends HttpServlet {
 		
 		String newService = request.getParameter("services");
 
-		boolean isAdded = CarServices.addService(newService);
-		if (isAdded) {
-			String message = "New Service Added successsfully";
-			response.sendRedirect("addServices.jsp?message=" + message);
-		} else {
-			String errorMessage = "Unable to add new service. Check again";
-			response.sendRedirect("addServices.jsp?errorMessage=" + errorMessage);
+		try {
+			boolean isAdded = CarServices.addService(newService);
+			if (isAdded) {
+				String message = "New Service Added successsfully";
+				response.sendRedirect("addServices.jsp?message=" + message);
+			} else {
+				String errorMessage = "Unable to add new service. Check again";
+				response.sendRedirect("addServices.jsp?errorMessage=" + errorMessage);
+			} 
+		} catch (Exception e) {
+			 e.printStackTrace();
 		}
 
 	}
