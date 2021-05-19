@@ -37,7 +37,7 @@ public class CarServices {
 	/**
 	 * this method adds new service
 	 * @param serviceName
-	 * @return
+	 * @return boolean 
 	 */
 	public static boolean addService(String serviceName) {
 		boolean isAdded = false;
@@ -54,6 +54,26 @@ public class CarServices {
 		}
 
 		return isAdded;
+	}
+	
+	/**
+	 * this method deletes existing service
+	 * @param serviceName
+	 * @return boolean
+	 */
+	public static boolean deleteService(String serviceName) {
+		boolean isDeleted =false;
+		if(ServiceValidation.stringValidation(serviceName)) {
+			String service = serviceName.toUpperCase();
+			if(carServicesList.contains(service)) {
+				carServicesList.remove(service);
+				isDeleted=true;
+			}
+			else {
+				isDeleted=false;
+			}
+		}
+		return isDeleted;
 	}
 
 }

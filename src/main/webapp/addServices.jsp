@@ -21,8 +21,8 @@
 		%>
 		<form action="AddServices" method="post">
 
-			<label for="add Service">Add Services</label> <input type="text"
-				name="services">
+			<label for="add Service">Add Services</label> 
+			<input type="text" name="services">
 			<button type="submit">Add Service</button>
 
 		</form>
