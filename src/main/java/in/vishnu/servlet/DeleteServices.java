@@ -25,16 +25,11 @@ public class DeleteServices extends HttpServlet {
 			throws ServletException, IOException {
 		String newService = request.getParameter("serviceName");
 
-		try {
-			boolean isDeleted = CarServices.deleteService(newService);
-			if (isDeleted) {
-				String message = "Deleted successfully";
-				response.sendRedirect("services.jsp?message=" + message);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
+		boolean isDeleted = CarServices.deleteService(newService);
+		if (isDeleted) {
+			String message = "Deleted successfully";
+			response.sendRedirect("services.jsp?message=" + message);
 		}
-
 	}
 
 }

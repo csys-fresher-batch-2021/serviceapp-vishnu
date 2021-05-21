@@ -2,6 +2,8 @@
 <link rel="stylesheet" href="assets/css/fontawesome.min.css">
 <link rel="stylesheet" href="assets/css/style.css">
 
+<%String role = (String) session.getAttribute("ROLE"); %>
+
 <header>
 	<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
 		<a class="navbar-brand" href="index.jsp">Car Service</a>
@@ -15,8 +17,10 @@
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 				<li class="nav-item active"><a class="nav-link"
 					href="index.jsp">Home <span class="sr-only">(current)</span></a></li>
+					<%if(role!=null){ %>
 				<li class="nav-item"><a class="nav-link" href="services.jsp">Services</a>
 				</li>
+				<%} %>
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" id="dropdownId"
 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
@@ -25,12 +29,21 @@
 							class="dropdown-item" href="#">Action 2</a>
 					</div></li>
 			</ul>
+			<%if(role==null){ %>
 			<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-				<li class="nav-item active"><a class="nav-link" href="#">Login</a>
-				</li>
+				<li class="nav-item active"><a class="nav-link"
+					href="login.jsp">Login</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">Register</a>
 				</li>
 			</ul>
+			<%} else{ %>
+			
+			<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+			
+				<li class="nav-item active"><a class="nav-link"
+					href="AdminLogOut">Logout</a></li>
+					</ul>
+			<%} %>
 
 		</div>
 	</nav>

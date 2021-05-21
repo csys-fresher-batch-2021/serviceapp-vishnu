@@ -3,7 +3,7 @@ package in.vishnu.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import in.vishnu.validation.ServiceValidation;
+import in.vishnu.validation.Validation;
 
 public class CarServices {
 
@@ -15,14 +15,9 @@ public class CarServices {
 
 	static {
 		carServicesList.add("TIRE REPLACEMENT");
-		carServicesList.add("BATTERY REPLACEMENT");
-		carServicesList.add("BRAKE REPLACEMENT");
-		carServicesList.add("SPARK PLUG REPLACEMENT");
-		carServicesList.add("WHEEL ALIGNMENT");
-		carServicesList.add("AIR FILTER REPLACEMENT");
 		carServicesList.add("OIL CHANGE");
+		carServicesList.add("BATTERY REPLACEMENT");
 		carServicesList.add("OTHER SERVICES");
-
 	}
 
 	/**
@@ -36,14 +31,15 @@ public class CarServices {
 
 	/**
 	 * this method adds new service
+	 * 
 	 * @param serviceName
-	 * @return boolean 
+	 * @return boolean
 	 */
 	public static boolean addService(String serviceName) {
 		boolean isAdded = false;
 
-		if(ServiceValidation.stringValidation(serviceName)) {
-			
+		if (Validation.stringValidation(serviceName)) {
+
 			String service = serviceName.toUpperCase();
 			if (carServicesList.contains(service)) {
 				isAdded = false;
@@ -55,25 +51,19 @@ public class CarServices {
 
 		return isAdded;
 	}
-	
+
 	/**
 	 * this method deletes existing service
+	 * 
 	 * @param serviceName
 	 * @return boolean
 	 */
 	public static boolean deleteService(String serviceName) {
-		boolean isDeleted =false;
-		if(ServiceValidation.stringValidation(serviceName)) {
-			String service = serviceName.toUpperCase();
-			if(carServicesList.contains(service)) {
-				carServicesList.remove(service);
-				isDeleted=true;
-			}
-			else {
-				isDeleted=false;
-			}
+		boolean isDeleted = false;
+		if (carServicesList.contains(serviceName)) {
+			carServicesList.remove(serviceName);
+			isDeleted = true;
 		}
 		return isDeleted;
 	}
-
 }

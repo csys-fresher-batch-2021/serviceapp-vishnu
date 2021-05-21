@@ -1,9 +1,9 @@
 package in.vishnu.validation;
 
-public class ServiceValidation {
-	
-	private ServiceValidation() {
-		//Default Constructor
+public class Validation {
+
+	private Validation() {
+		// Default Constructor
 	}
 
 	/**
@@ -26,4 +26,18 @@ public class ServiceValidation {
 		}
 		return isValidService;
 	}
+
+	/**
+	 * returns true if name is valid
+	 * @param name
+	 * @return boolean
+	 */
+	public static boolean isNameValid(String name) {
+		boolean isValid = true;
+		if (name.trim().equals("")) {
+			isValid = false;
+		}
+		return isValid;
+	}
+
 }

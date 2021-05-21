@@ -31,7 +31,7 @@ public class AddServices extends HttpServlet {
 		
 		String newService = request.getParameter("services");
 
-		try {
+		
 			boolean isAdded = CarServices.addService(newService);
 			if (isAdded) {
 				String message = "New Service Added successsfully";
@@ -40,10 +40,8 @@ public class AddServices extends HttpServlet {
 				String errorMessage = "Unable to add new service. Check again";
 				response.sendRedirect("addServices.jsp?errorMessage=" + errorMessage);
 			} 
-		} catch (Exception e) {
-			 e.printStackTrace();
-		}
+		} 
 
 	}
 
-}
+
