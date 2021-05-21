@@ -6,6 +6,9 @@ import org.junit.Test;
 
 public class DeleteServicesTest {
 
+	/**
+	 * this method checks if valid service name is passed 
+	 */
 	@Test
 	public void test1() {
 		boolean isValid = CarServices.deleteService("TIRE REPLACEMENT");
