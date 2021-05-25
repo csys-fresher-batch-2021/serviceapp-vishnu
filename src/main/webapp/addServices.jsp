@@ -6,7 +6,7 @@
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
-		<h3>ADD PACKAGES</h3>
+		<h3>ADD SERVICE</h3>
 		<%
 		String errorMessage = request.getParameter("errorMessage");
 		if (errorMessage != null) {

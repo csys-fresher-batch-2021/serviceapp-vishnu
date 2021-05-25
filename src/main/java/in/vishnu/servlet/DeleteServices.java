@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import in.vishnu.exception.ServiceException;
 import in.vishnu.services.CarServices;
 
 /**
@@ -26,10 +27,18 @@ public class DeleteServices extends HttpServlet {
 		String newService = request.getParameter("serviceName");
 
 		boolean isDeleted = CarServices.deleteService(newService);
-		if (isDeleted) {
-			String message = "Deleted successfully";
-			response.sendRedirect("services.jsp?message=" + message);
+
+		try {
+			if (isDeleted) {
+				String message = "Deleted successfully";
+				response.sendRedirect("services.jsp?message=" + message);
+			}
+		} catch (ServiceException | IOException e) {
+			
+			String message = e.getMessage();
+			response.sendRedirect("service.jsp?"+message);
 		}
+
 	}
 
 }

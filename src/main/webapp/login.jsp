@@ -19,7 +19,7 @@
 			<label for="username">User-Name:</label> <input type="email"
 				name="userName" placeholder="Enter your email" autofocus required>
 			<br> <label for="password">Password:</label> <input
-				type="password" name="password" required> <br>
+				type="password" name="password" placeholder="Password" required> <br>
 			<button type="submit">LOG IN</button>
 		</form>
 
