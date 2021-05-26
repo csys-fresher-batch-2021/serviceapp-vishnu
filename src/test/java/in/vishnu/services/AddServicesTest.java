@@ -11,10 +11,9 @@ public class AddServicesTest {
 	 */
 	@Test
 	public void addServiceTest1() {
-		String serviceName = "painting";
+		String serviceName = "tire replacement";
 		boolean isAdded = CarServices.addService(serviceName);
 		assertTrue(isAdded);
-
 	}
 
 	@Test

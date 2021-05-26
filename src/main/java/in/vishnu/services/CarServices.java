@@ -1,8 +1,10 @@
 package in.vishnu.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import in.vishnu.dao.ServiceDao;
+
+import in.vishnu.exception.ServiceException;
 import in.vishnu.validation.Validation;
 
 public class CarServices {
@@ -11,22 +13,14 @@ public class CarServices {
 		// default constructor
 	}
 
-	private static List<String> carServicesList = new ArrayList<>();
-
-	static {
-		carServicesList.add("TIRE REPLACEMENT");
-		carServicesList.add("OIL CHANGE");
-		carServicesList.add("BATTERY REPLACEMENT");
-		carServicesList.add("OTHER SERVICES");
-	}
-
 	/**
 	 * returns car services list
 	 * 
 	 * @return
 	 */
 	public static List<String> getServices() {
-		return carServicesList;
+		ServiceDao dao = new ServiceDao();
+		return dao.displayService();
 	}
 
 	/**
@@ -41,10 +35,15 @@ public class CarServices {
 		if (Validation.stringValidation(serviceName)) {
 
 			String service = serviceName.toUpperCase();
-			if (carServicesList.contains(service)) {
+			ServiceDao dao1 = new ServiceDao();
+			List<String> newList = dao1.getAllServices();
+
+			if (newList.contains(service)) {
 				isAdded = false;
 			} else {
-				carServicesList.add(carServicesList.size() - 1, service);
+
+				dao1.addService(service);
+
 				isAdded = true;
 			}
 		}
@@ -60,10 +59,17 @@ public class CarServices {
 	 */
 	public static boolean deleteService(String serviceName) {
 		boolean isDeleted = false;
-		if (carServicesList.contains(serviceName)) {
-			carServicesList.remove(serviceName);
+
+		ServiceDao dao1 = new ServiceDao();
+		List<String> newList = dao1.getAllServices();
+
+		if (newList.contains(serviceName)) {
+			dao1.removeService(serviceName);
 			isDeleted = true;
+		} else {
+			throw new ServiceException("Unable to delete");
 		}
+
 		return isDeleted;
 	}
 }
