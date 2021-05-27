@@ -34,10 +34,11 @@ public class Validation {
 	 */
 	public static boolean isNameValid(String name) {
 		boolean isValid = true;
-		if (name.trim().equals("")) {
+		if (name.trim().equals("") || name.length() < 3 && name.length() > 20) {
 			isValid = false;
 		}
 		return isValid;
 	}
+
 
 }
