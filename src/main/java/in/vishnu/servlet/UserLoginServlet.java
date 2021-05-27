@@ -10,33 +10,31 @@ import javax.servlet.http.HttpSession;
 
 import in.vishnu.services.Login;
 
+
 /**
- * Servlet implementation class AdminLoginServlet
+ * Servlet implementation class UserLogin
  */
-@WebServlet("/AdminLogin")
-public class AdminLogin extends HttpServlet {
+@WebServlet("/UserLoginServlet")
+public class UserLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
    
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userName = request.getParameter("userName");
+		String userLogin = request.getParameter("email");
 		String password = request.getParameter("password");
-		boolean isValid = Login.isAdminLoginValid(userName, password);
-		if(isValid) {
+		
+		if(Login.isUserLoginValid(userLogin, password)) {
 			HttpSession session = request.getSession();
-			session.setAttribute("ADMIN","admin");
-			response.sendRedirect("services.jsp");
+			session.setAttribute("USER", "user");
+			String successMessage = "Login Success";
+			response.sendRedirect("index.jsp?successMessage="+successMessage);
+		}else {
+			String invalidMessage = "Invalid Login Credentials";
+			response.sendRedirect("UserLogin.jsp?invalidMessage="+invalidMessage);
 		}
-		else {
-			String errorMessage = "Invalid Admin Credentials";
-			response.sendRedirect("login.jsp?errorMessage="+errorMessage);
-		}
-		
-		
 	}
 
 }

@@ -7,7 +7,7 @@
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
-		<h1>Login</h1>
+		<h1>Admin</h1>
 		<%
 		String errorMessage = request.getParameter("errorMessage");
 		if (errorMessage != null) {
@@ -16,7 +16,7 @@
 		%>
 
 		<form action="AdminLogin" method="post">
-			<label for="username">User-Name:</label> <input type="email"
+			<label for="username">Admin:</label> <input type="text"
 				name="userName" placeholder="Enter your email" autofocus required>
 			<br> <label for="password">Password:</label> <input
 				type="password" name="password" placeholder="Password" required> <br>
