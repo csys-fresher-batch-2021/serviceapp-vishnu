@@ -1,6 +1,8 @@
 package in.vishnu.services;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import in.vishnu.dao.LoginDao;
 import in.vishnu.exception.DbException;
@@ -46,6 +48,20 @@ public class Login {
 			throw new DbException("Invalid Credentials");
 		}
 		return isValid;
+	}
+	
+	
+	public static List<String> getuserDetails(String email, String password) {
+		List<String> userList = new ArrayList<>();
+		try {
+			LoginDao dao = new LoginDao();
+			userList = dao.getUserDetails(email, password);
+			
+		}catch (DbException e) {
+			e.printStackTrace();
+			throw new DbException("Invalid Credentials");
+		}
+		return userList;
 	}
 
 }

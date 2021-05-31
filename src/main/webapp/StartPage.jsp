@@ -10,7 +10,8 @@
 <jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid"></main>
 
-<h4>Welcome to<mark>AXLES</mark> </h4>
+<h4>Welcome to AXLES</h4>
+<p>A car service Application</p>
 
 </body>
 </html>

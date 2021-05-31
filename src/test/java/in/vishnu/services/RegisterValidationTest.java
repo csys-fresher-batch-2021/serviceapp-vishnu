@@ -10,7 +10,7 @@ import in.vishnu.validation.ContactValidation;
 import in.vishnu.validation.EmailValidation;
 import in.vishnu.validation.PasswordValidation;
 import in.vishnu.validation.RegistrationValidation;
-import in.vishnu.validation.Validation;
+import in.vishnu.validation.StringValidation;
 
 public class RegisterValidationTest {
 
@@ -46,7 +46,7 @@ public class RegisterValidationTest {
 	@Test
 	public void test4() {
 		String firstname = "jacob";
-		boolean isValid = Validation.isNameValid(firstname);
+		boolean isValid = StringValidation.isNameValid(firstname);
 		assertTrue(isValid);
 	}
 	

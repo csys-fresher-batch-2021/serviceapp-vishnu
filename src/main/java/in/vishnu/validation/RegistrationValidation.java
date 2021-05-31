@@ -8,7 +8,7 @@ public class RegistrationValidation {
 	}
 	public static boolean isRegistrationValid(User user) {
 		boolean isValidRegistration = false;
-		if(Validation.isNameValid(user.getFirstName()) && Validation.isNameValid(user.getLastName()) && ContactValidation.isValidContact(user.getContact()) 
+		if(StringValidation.isNameValid(user.getFirstName()) && StringValidation.isNameValid(user.getLastName()) && ContactValidation.isValidContact(user.getContact()) 
 				&& EmailValidation.isEmailValid(user.getEmail()) && PasswordValidation.isPasswordStrong(user.getPassword()) ) {		
 			isValidRegistration=true;
 		}

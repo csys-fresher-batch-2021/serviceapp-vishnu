@@ -7,7 +7,7 @@
 
 <header>
 	<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-		<a class="navbar-brand" href="StartPage.jsp">Car Service</a>
+		<a class="navbar-brand" href="StartPage.jsp">AXLES</a>
 		<button class="navbar-toggler d-lg-none" type="button"
 			data-toggle="collapse" data-target="#collapsibleNavId"
 			aria-controls="collapsibleNavId" aria-expanded="false"
@@ -20,8 +20,10 @@
 				<li class="nav-item active"><a class="nav-link"
 					href="index.jsp">Home <span class="sr-only">(current)</span></a></li>
 				<%} %>	
-					<%if(role!=null || user!=null){ %>
+					<%if(role!=null && user==null){ %>
 				<li class="nav-item"><a class="nav-link" href="services.jsp">Services</a>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="serviceCenters.jsp">Service Centers</a>
 				</li>
 				<%} %>
 				
@@ -35,14 +37,19 @@
 				<li class="nav-item"><a class="nav-link" href="UserRegistration.jsp">Register</a>
 				</li>
 			</ul>
-			<%} else if(role=="admin"){ %>
+			<%} else if(role!=null){ %>
 			
-			<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-			
+			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+			<li class="nav-item"><a class="nav-link" href="carsTable.jsp">Cars</a>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="addServices.jsp">Add new Detail</a>
+				</li>
+				</ul>
+				<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
 				<li class="nav-item active"><a class="nav-link"
 					href="AdminLogOut">Logout</a></li>
-					
 					</ul>
+					
 			<%} else if(role==null && user=="user"){%>
 			<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
 			

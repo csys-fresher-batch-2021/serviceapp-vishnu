@@ -8,6 +8,7 @@
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid"></main>
+	<h3>Registration</h3>
 	<%
 	String successMessage = request.getParameter("successMessage");
 	if (successMessage != null) {

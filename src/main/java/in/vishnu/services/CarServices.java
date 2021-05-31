@@ -5,7 +5,7 @@ import java.util.List;
 import in.vishnu.dao.ServiceDao;
 
 import in.vishnu.exception.ServiceException;
-import in.vishnu.validation.Validation;
+import in.vishnu.validation.StringValidation;
 
 public class CarServices {
 
@@ -32,7 +32,7 @@ public class CarServices {
 	public static boolean addService(String serviceName) {
 		boolean isAdded = false;
 
-		if (Validation.stringValidation(serviceName)) {
+		if (StringValidation.serviceNameValidation(serviceName)) {
 
 			String service = serviceName.toUpperCase();
 			ServiceDao dao1 = new ServiceDao();
@@ -60,14 +60,18 @@ public class CarServices {
 	public static boolean deleteService(String serviceName) {
 		boolean isDeleted = false;
 
-		ServiceDao dao1 = new ServiceDao();
-		List<String> newList = dao1.getAllServices();
+		try {
+			ServiceDao dao1 = new ServiceDao();
+			List<String> newList = dao1.getAllServices();
 
-		if (newList.contains(serviceName)) {
-			dao1.removeService(serviceName);
-			isDeleted = true;
-		} else {
-			throw new ServiceException("Unable to delete");
+			if (newList.contains(serviceName)) {
+				dao1.removeService(serviceName);
+				isDeleted = true;
+			}
+		} catch (ServiceException e) {			
+			e.printStackTrace();
+			String message = e.getMessage();
+			throw new ServiceException(message);
 		}
 
 		return isDeleted;

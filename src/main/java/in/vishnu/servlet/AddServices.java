@@ -28,20 +28,17 @@ public class AddServices extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		String newService = request.getParameter("services");
 
-		
-			boolean isAdded = CarServices.addService(newService);
-			if (isAdded) {
-				String message = "New Service Added successsfully";
-				response.sendRedirect("addServices.jsp?message=" + message);
-			} else {
-				String errorMessage = "Unable to add new service. Check again";
-				response.sendRedirect("addServices.jsp?errorMessage=" + errorMessage);
-			} 
-		} 
-
+		boolean isAdded = CarServices.addService(newService);
+		if (isAdded) {
+			String message = "New Service Added successsfully";
+			response.sendRedirect("addServices.jsp?message=" + message);
+		} else {
+			String errorMessage = "Unable to add new service. Check again";
+			response.sendRedirect("addServices.jsp?errorMessage=" + errorMessage);
+		}
 	}
 
-
+}
