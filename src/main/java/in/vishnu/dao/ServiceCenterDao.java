@@ -32,28 +32,6 @@ public class ServiceCenterDao {
 		
 	}
 	
-	public List<ServiceCenter> displayServiceCenter() {
-		List<ServiceCenter> serviceCenterList = new ArrayList<>();
-		Connection connection;
-		try {
-			connection = ConnectionUtil.getConnection();
-			String sql = "select * from service_centers_db";
-			try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-				ResultSet rs = preparedStatement.executeQuery();
-				while(rs.next()) {
-					String serviceCenterName = rs.getString("center_name");
-					String location = rs.getString("location");
-					ServiceCenter center = new ServiceCenter(serviceCenterName, location);
-					serviceCenterList.add(center);
-				}
-			}
-		} catch (ClassNotFoundException | SQLException e) {
-			
-			e.printStackTrace();
-			throw new DbException("Unable to fetch data");
-		}
-		return serviceCenterList;
-	}
 	
 	public void removeServiceCenter(ServiceCenter serviceCenter) {
 		Connection connection = null;
@@ -82,10 +60,10 @@ public class ServiceCenterDao {
 			try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 				ResultSet rs = preparedStatement.executeQuery();
 				while(rs.next()) {
-					String serviceCenterName = rs.getString("center_name");
+					String serviceCenter = rs.getString("center_name");
 					String location = rs.getString("location");
-					ServiceCenter center = new ServiceCenter(serviceCenterName, location);
-					listOfServiceCenters.add(center);
+					ServiceCenter newCenter = new ServiceCenter(serviceCenter, location);
+					listOfServiceCenters.add(newCenter);
 				}
 			}
 		} catch (ClassNotFoundException | SQLException e) {

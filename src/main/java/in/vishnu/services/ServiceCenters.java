@@ -17,7 +17,7 @@ public class ServiceCenters {
 	 */
 	public static List<ServiceCenter> showServiceCenters(){
 		ServiceCenterDao dao = new ServiceCenterDao();
-		return dao.displayServiceCenter();
+		return dao.getAllServiceCenters();
 	}
 	
 	/**
