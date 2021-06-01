@@ -46,6 +46,7 @@ public class ServiceDao {
 		} catch (ClassNotFoundException | SQLException e) {
 			
 			e.printStackTrace();
+			throw new DbException("Unable to fetch data");
 		}
 		return serviceList;
 	}

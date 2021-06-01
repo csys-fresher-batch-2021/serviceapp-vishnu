@@ -1,5 +1,6 @@
 package in.vishnu.servlet;
 
+import java.util.List;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,6 +30,10 @@ public class UserLoginServlet extends HttpServlet {
 		if(Login.isUserLoginValid(userLogin, password)) {
 			HttpSession session = request.getSession();
 			session.setAttribute("USER", "user");
+			List<String> userDetails = Login.getuserDetails(userLogin, password);
+			session.setAttribute("firstName", userDetails.get(0));
+			session.setAttribute("lastName", userDetails.get(1));
+			session.setAttribute("contact", userDetails.get(2));
 			String successMessage = "Login Success";
 			response.sendRedirect("index.jsp?successMessage="+successMessage);
 		}else {

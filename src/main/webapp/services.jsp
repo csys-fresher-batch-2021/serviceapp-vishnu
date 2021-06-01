@@ -16,6 +16,8 @@
 			out.println("<font color='green'>" + infoMessage + "</font>");
 		}
 		%>
+		
+		
 		<table class="table table-bordered">
 			<caption>Available Services</caption>
 			<thead>
@@ -52,9 +54,7 @@
 				%>
 			</tbody>
 		</table>
-		<%if(admin=="admin"){ %>
-		<a href="addServices.jsp">Add new service</a>
-		<%} %>
+		
 	</main>
 </body>
 

@@ -31,11 +31,12 @@ public class RegistrationServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		User newUser = new User(firstName, lastName, contact, email, password);
+		
 		if(!UserRegistration.isUserExist(newUser)) {
 			
 			if(UserRegistration.userRegistration(newUser)) {
 				String successMessage = "You have registered successfully";
-				response.sendRedirect("UserLogin.jsp?errorMessage="+successMessage);
+				response.sendRedirect("UserLogin.jsp?successMessage="+successMessage);
 			}else {
 				String invalidMessage = "Invalid details";
 				response.sendRedirect("UserRegistration.jsp?invalidMessage="+invalidMessage);
