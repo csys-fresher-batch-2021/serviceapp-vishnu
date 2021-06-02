@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import in.vishnu.model.Service;
 import in.vishnu.services.CarServices;
 
 /**
@@ -30,14 +31,20 @@ public class AddServices extends HttpServlet {
 			throws ServletException, IOException {
 
 		String newService = request.getParameter("services");
-
-		boolean isAdded = CarServices.addService(newService);
-		if (isAdded) {
-			String message = "New Service Added successsfully";
-			response.sendRedirect("addServices.jsp?message=" + message);
-		} else {
-			String errorMessage = "Unable to add new service. Check again";
-			response.sendRedirect("addServices.jsp?errorMessage=" + errorMessage);
+		int newCharge = Integer.parseInt(request.getParameter("servicecharge"));
+		Service serviceModel = new Service(newService, newCharge);
+		if(!CarServices.isServiceExist(serviceModel)) {
+			if(CarServices.addService(serviceModel)) {
+				String message = "New Service Added successsfully";
+				response.sendRedirect("addServices.jsp?message=" + message);				
+			}
+			else {
+				String errorMessage = "Unable to add new service. Check again";
+				response.sendRedirect("addServices.jsp?errorMessage=" + errorMessage);				
+			}
+		}else {
+			String existingServiceMsg = "Service already exist in list";
+			response.sendRedirect("addServices.jsp?existingServiceMsg="+existingServiceMsg);
 		}
 	}
 

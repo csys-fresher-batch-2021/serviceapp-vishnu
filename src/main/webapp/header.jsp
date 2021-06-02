@@ -18,7 +18,7 @@
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 			<%if(user!=null){ %>
 				<li class="nav-item active"><a class="nav-link"
-					href="index.jsp">Home <span class="sr-only">(current)</span></a></li>
+					href="homePage.jsp">Home <span class="sr-only">(current)</span></a></li>
 				<%} %>	
 					<%if(role!=null && user==null){ %>
 				<li class="nav-item"><a class="nav-link" href="services.jsp">Services</a>

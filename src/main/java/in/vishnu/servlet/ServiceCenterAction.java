@@ -27,15 +27,15 @@ public class ServiceCenterAction extends HttpServlet {
 		String carModel = request.getParameter("cars");
 		String selectedService = request.getParameter("services");
 		String registrationNumber = request.getParameter("regno");
-		if(StringValidation.isRegistrationValid(registrationNumber)) {
+		if(StringValidation.isRegistrationNumberValid(registrationNumber)) {
 			HttpSession session = request.getSession();
 			session.setAttribute("registrationNumber", registrationNumber);
 			session.setAttribute("carModel", carModel);
 			session.setAttribute("selectedService", selectedService);
 			response.sendRedirect("serviceCenters.jsp");
 		}else {
-			String message = "Invalid Registration Number";
-			response.sendRedirect("index.jsp?Invalid="+message);
+			String registrationNumberMessage = "Invalid Registration Number";
+			response.sendRedirect("homePage.jsp?registrationNumberMessage="+registrationNumberMessage);
 		}
 	}
 
