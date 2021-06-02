@@ -56,7 +56,7 @@ public class ServiceCenterDao {
 		Connection connection;
 		try {
 			connection = ConnectionUtil.getConnection();
-			String sql = "select * from service_center_db";
+			String sql = "select * from service_centers_db";
 			try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 				ResultSet rs = preparedStatement.executeQuery();
 				while(rs.next()) {

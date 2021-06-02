@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import in.vishnu.exception.ServiceException;
+import in.vishnu.model.Service;
 import in.vishnu.services.CarServices;
 
 /**
@@ -25,8 +26,10 @@ public class DeleteServices extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String newService = request.getParameter("serviceName");
+		int newCharge = Integer.parseInt(request.getParameter("serviceCharge"));
+		Service newServiceModel = new Service(newService, newCharge);
 
-		boolean isDeleted = CarServices.deleteService(newService);
+		boolean isDeleted = CarServices.deleteService(newServiceModel);
 
 		try {
 			if (isDeleted) {

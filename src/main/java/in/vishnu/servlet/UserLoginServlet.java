@@ -35,7 +35,7 @@ public class UserLoginServlet extends HttpServlet {
 			session.setAttribute("lastName", userDetails.get(1));
 			session.setAttribute("contact", userDetails.get(2));
 			String successMessage = "Login Success";
-			response.sendRedirect("index.jsp?successMessage="+successMessage);
+			response.sendRedirect("homePage.jsp?successMessage="+successMessage);
 		}else {
 			String invalidMessage = "Invalid Login Credentials";
 			response.sendRedirect("UserLogin.jsp?invalidMessage="+invalidMessage);
