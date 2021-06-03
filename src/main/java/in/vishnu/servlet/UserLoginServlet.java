@@ -30,6 +30,7 @@ public class UserLoginServlet extends HttpServlet {
 		if(Login.isUserLoginValid(userLogin, password)) {
 			HttpSession session = request.getSession();
 			session.setAttribute("USER", "user");
+			session.setAttribute("sessionEmail", userLogin);
 			List<String> userDetails = Login.getuserDetails(userLogin, password);
 			session.setAttribute("firstName", userDetails.get(0));
 			session.setAttribute("lastName", userDetails.get(1));
