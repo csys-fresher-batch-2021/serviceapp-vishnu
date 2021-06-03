@@ -20,6 +20,11 @@
 	String selectedService = (String) session.getAttribute("selectedService");
 	String registrationNumber = (String) session.getAttribute("registrationNumber");
 	Integer fare = (Integer) session.getAttribute("finalFare");
+	
+	String notConfirmMessage = request.getParameter("processFailed");
+	if (notConfirmMessage != null) {
+		out.println("<font color='red'>" + notConfirmMessage + "</font>");
+	}
 	%>
 	<h3>Billing</h3>
 	<form action="GetBillServlet" method="post">
@@ -80,8 +85,12 @@
 				Charge</button>
 		</div>
 	</form>
+	<form action="OnBookingConfirmation" method="post">
+		<%if(fare!=null){ %>
 	<div class="text-right">
 		<button type="submit" class="btn btn-success">Confirm Booking</button>
 	</div>
+	</form>
+	<%} %>
 </body>
 </html>

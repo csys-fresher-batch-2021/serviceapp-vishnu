@@ -128,7 +128,7 @@ public class StringValidation {
 			if(length==0 || charArray[0]<65 || charArray[0]>90 || 
 					charArray[1]<65 || charArray[1]>90 || charArray[3]<48 
 					||charArray[3]>57 || charArray[4]<48 || charArray[4]>57
-					|| lastFourDigitInt<=999 || lastFourDigitInt>=10000) {
+					|| lastFourDigitInt<=0 || lastFourDigitInt>=10000) {
 				isValid=false;
 			}
 		}
