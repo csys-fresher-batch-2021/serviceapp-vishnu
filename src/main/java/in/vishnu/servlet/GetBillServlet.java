@@ -16,24 +16,24 @@ import in.vishnu.services.CarServices;
 @WebServlet("/GetBillServlet")
 public class GetBillServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-   
+
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		String serviceType = (String)session.getAttribute("selectedService");
+		String serviceType = (String) session.getAttribute("selectedService");
 		int serviceChargeFinal = CarServices.getServiceCharge(serviceType);
-		if(serviceChargeFinal>=0) {
+		if (serviceChargeFinal >= 0) {
 			session.setAttribute("finalFare", serviceChargeFinal);
-			response.sendRedirect("billing.jsp?msg="+"success");
+			response.sendRedirect("billing.jsp?msg=" + "success");
+		} else {
+			response.sendRedirect("billing.jsp?msg=" + "bill genration failed");
 		}
-		else {
-			response.sendRedirect("billing.jsp?msg="+"bill genration failed");
-		}
-		
+
 	}
 
 }

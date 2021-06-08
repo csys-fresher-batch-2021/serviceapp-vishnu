@@ -16,27 +16,26 @@ import in.vishnu.services.Login;
 @WebServlet("/AdminLogin")
 public class AdminLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-   
+
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
 		boolean isValid = Login.isAdminLoginValid(userName, password);
-		if(isValid) {
+		if (isValid) {
 			HttpSession session = request.getSession();
-			session.setAttribute("ADMIN","admin");
+			session.setAttribute("ADMIN", "admin");
 			response.sendRedirect("services.jsp");
-		}
-		else {
+		} else {
 			String errorMessage = "Invalid Admin Credentials";
-			response.sendRedirect("login.jsp?errorMessage="+errorMessage);
+			response.sendRedirect("login.jsp?errorMessage=" + errorMessage);
 		}
-		
-		
+
 	}
 
 }

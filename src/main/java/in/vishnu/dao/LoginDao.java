@@ -11,14 +11,21 @@ import in.vishnu.exception.DbException;
 import in.vishnu.util.ConnectionUtil;
 
 public class LoginDao {
-	
+
+	/**
+	 * This method is used for user login
+	 * 
+	 * @param email
+	 * @param password
+	 * @return
+	 */
 	public boolean loginDao(String email, String password) {
 		boolean isProcessDone = false;
 		Connection connection = null;
 		PreparedStatement pst = null;
 		try {
 			connection = ConnectionUtil.getConnection();
-			String sql = "select * from user_details where email=? AND password=?";
+			String sql = "SELECT * FROM user_details WHERE email=? AND password=?";
 			pst = connection.prepareStatement(sql);
 			pst.setString(1, email);
 			pst.setString(2, password);
@@ -28,20 +35,29 @@ public class LoginDao {
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-			throw new DbException("unable to connect to database");
+			throw new DbException("Unable to connect to database");
 		} finally {
 			ConnectionUtil.close(pst, connection);
 		}
 		return isProcessDone;
 	}
 
+	/**
+	 * This method is used for getting all user details from database
+	 * 
+	 * @param email
+	 * @param password
+	 * @return
+	 */
 	public List<String> getUserDetails(String email, String password) {
 		List<String> userList = new ArrayList<>();
 		Connection connection = null;
 		PreparedStatement pst = null;
 		try {
 			connection = ConnectionUtil.getConnection();
-			String sql = "select first_name, last_name, contact from user_details where first_name like '%' and last_name like '%' and contact > 1 and email =? and password=?";
+			String sql = "SELECT first_name, last_name, contact FROM user_details "
+					+ "WHERE first_name LIKE '%' AND last_name LIKE '%' AND contact > 1"
+					+ "AND email =? AND password=?";
 			pst = connection.prepareStatement(sql);
 			pst.setString(1, email);
 			pst.setString(2, password);
@@ -58,7 +74,7 @@ public class LoginDao {
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 			throw new DbException(e.getMessage());
-		}finally {
+		} finally {
 			ConnectionUtil.close(pst, connection);
 		}
 

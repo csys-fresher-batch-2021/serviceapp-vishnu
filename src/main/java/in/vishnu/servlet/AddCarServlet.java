@@ -15,22 +15,23 @@ import in.vishnu.services.Cars;
 @WebServlet("/AddCarServlet")
 public class AddCarServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    
+
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		String newCar = request.getParameter("carname");
 		boolean isAdded = Cars.addCar(newCar);
-		if(isAdded) {
+		if (isAdded) {
 			String carAddedMessage = "New car added successfully";
-			response.sendRedirect("addServices.jsp?carAddedMessage="+carAddedMessage);
-		}
-		else {
+			response.sendRedirect("addServices.jsp?carAddedMessage=" + carAddedMessage);
+		} else {
 			String carNotAddedMsg = "Unable to add new car";
-			response.sendRedirect("addServices.jsp?carNotAddedMsg="+carNotAddedMsg);
+			response.sendRedirect("addServices.jsp?carNotAddedMsg=" + carNotAddedMsg);
 		}
 	}
 

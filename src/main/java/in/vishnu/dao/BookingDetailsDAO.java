@@ -12,12 +12,19 @@ import in.vishnu.util.ConnectionUtil;
 
 public class BookingDetailsDAO {
 
+	/**
+	 * This method is used to add booking details to Database
+	 * 
+	 * @param booking
+	 */
 	public void addBookingDetails(BookingDetails booking) {
 		Connection connection = null;
 		PreparedStatement pst = null;
 		try {
 			connection = ConnectionUtil.getConnection();
-			String sql = "insert into booking_details(booking_id, email_id, car_name, registration_no, service_type, service_center, booking_status)values(nextval('booking_id_sequence'), ?,?,?,?,?,'CONFIRMED')";
+			String sql = "INSERT INTO booking_details(booking_id, email_id, car_name, "
+					+ "registration_no, service_type, service_center, booking_status)"
+					+ "VALUES(NEXTVAL('booking_id_sequence'), ?,?,?,?,?,'CONFIRMED')";
 			pst = connection.prepareStatement(sql);
 			pst.setString(1, booking.getEmailId());
 			pst.setString(2, booking.getCarName());

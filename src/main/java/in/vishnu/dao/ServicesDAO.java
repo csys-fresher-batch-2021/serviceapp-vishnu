@@ -13,12 +13,18 @@ import in.vishnu.util.ConnectionUtil;
 
 public class ServicesDAO {
 
+	/**
+	 * This method is used for new service details to Database
+	 * 
+	 * @param services
+	 */
 	public void addService(Service services) {
 		Connection connection = null;
 		PreparedStatement pst = null;
 		try {
 			connection = ConnectionUtil.getConnection();
-			String sql = "insert into services(service_id, service_name, service_charge)values(nextval('service_id_sequence'),?,?)";
+			String sql = "INSERT INTO services(service_id, service_name, service_charge)"
+					+ "VALUES(NEXTVAL('service_id_sequence'),?,?)";
 			pst = connection.prepareStatement(sql);
 			pst.setString(1, services.getServiceName());
 			pst.setInt(2, services.getServiceCharge());
@@ -31,13 +37,18 @@ public class ServicesDAO {
 		}
 	}
 
+	/**
+	 * This method is used to get all services from database
+	 * 
+	 * @return
+	 */
 	public List<Service> getAllServices() {
 		List<Service> listOfServices = new ArrayList<>();
 		Connection connection = null;
 		PreparedStatement pst = null;
 		try {
 			connection = ConnectionUtil.getConnection();
-			String sql = "select * from services";
+			String sql = "SELECT * FROM services";
 			pst = connection.prepareStatement(sql);
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
@@ -49,51 +60,61 @@ public class ServicesDAO {
 
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-			throw new DbException("Unable to fetch data");
-		}finally {
+			throw new DbException("Unable to fetch data from db");
+		} finally {
 			ConnectionUtil.close(pst, connection);
 		}
 		return listOfServices;
 	}
-	
-	
+
+	/**
+	 * This method is used to remove service from database
+	 * 
+	 * @param service
+	 */
 	public void removeService(Service service) {
 		Connection connection = null;
 		PreparedStatement pst = null;
 		try {
 			connection = ConnectionUtil.getConnection();
-			String sql = "delete from services where service_name=? AND service_charge=?";
+			String sql = "DELETE FROM services WHERE service_name=? AND service_charge=?";
 			pst = connection.prepareStatement(sql);
 			pst.setString(1, service.getServiceName());
 			pst.setInt(2, service.getServiceCharge());
 			pst.executeUpdate();
-		}catch(ClassNotFoundException | SQLException e){
+		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 			throw new DbException("Cannot delete service from db");
-		}finally {
+		} finally {
 			ConnectionUtil.close(pst, connection);
-		}		
+		}
 	}
-	
+
+	/**
+	 * This method is used to get service charge from database
+	 * 
+	 * @param serviceType
+	 * @return
+	 */
 	public int getServiceCharge(String serviceType) {
 		Connection connection = null;
 		PreparedStatement pst = null;
 		int serviceCharge = 0;
 		try {
 			connection = ConnectionUtil.getConnection();
-			String sql = "select service_charge from services where service_name=?";
+			String sql = "SELECT service_charge FROM services WHERE service_name=?";
 			pst = connection.prepareStatement(sql);
 			pst.setString(1, serviceType);
 			ResultSet rs = pst.executeQuery();
-			while(rs.next()) {
+			while (rs.next()) {
 				int charge = rs.getInt("service_charge");
-				serviceCharge +=charge;
+				serviceCharge += charge;
 				break;
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-			throw new DbException("Unable to fetch data");
-		}finally {
+			throw new DbException("Unable to fetch data from db");
+		} finally {
 			ConnectionUtil.close(pst, connection);
 		}
 		return serviceCharge;

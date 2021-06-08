@@ -12,7 +12,7 @@ public class ServiceCenters {
 		
 	}
 	/**
-	 * lists all service centers
+	 * This method is used to lists all service centers
 	 * @return list
 	 */
 	public static List<ServiceCenter> showServiceCenters(){
@@ -21,7 +21,7 @@ public class ServiceCenters {
 	}
 	
 	/**
-	 * add new service center
+	 * This method is used to add new service center
 	 * @param serviceCenter
 	 * @return boolean
 	 */
@@ -42,7 +42,7 @@ public class ServiceCenters {
 	}
 	
 	/**
-	 *   remove the service center details
+	 * This method is used to remove the service center details
 	 * @param serviceCenter
 	 * @return
 	 */

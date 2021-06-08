@@ -15,25 +15,23 @@ import in.vishnu.services.Cars;
 @WebServlet("/DeleteCarServlet")
 public class DeleteCarServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-   
+
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String carName = request.getParameter("carName");
 		boolean isDeleted = Cars.removeCar(carName);
-		if(isDeleted) {
+		if (isDeleted) {
 			String carDeletedMsg = "Car successfully deleted";
-			response.sendRedirect("carsTable.jsp?carDeletedMsg="+carDeletedMsg);
-		}
-		else {
+			response.sendRedirect("carsTable.jsp?carDeletedMsg=" + carDeletedMsg);
+		} else {
 			String carNotDeletedMsg = "Unable to delete";
-			response.sendRedirect("carsTable.jsp?carNotDeletedMsg="+carNotDeletedMsg);
+			response.sendRedirect("carsTable.jsp?carNotDeletedMsg=" + carNotDeletedMsg);
 		}
 	}
-
-	
 
 }

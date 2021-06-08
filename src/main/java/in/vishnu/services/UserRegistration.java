@@ -12,6 +12,12 @@ public class UserRegistration {
 
 	}
 
+	/**
+	 * This method is used to user registration
+	 * 
+	 * @param user
+	 * @return
+	 */
 	public static boolean userRegistration(User user) {
 		boolean isProcessDone = false;
 		try {
@@ -28,20 +34,27 @@ public class UserRegistration {
 		return isProcessDone;
 	}
 
+	/**
+	 * This method is used to find if user exist in database
+	 * 
+	 * @param user
+	 * @return
+	 */
 	public static boolean isUserExist(User user) {
 		boolean isExist = false;
 		try {
 			RegistrationDao dao = new RegistrationDao();
 			List<User> newList = dao.getAllUsers();
 			for (User useritem : newList) {
-				if (useritem.getContact() == user.getContact() || useritem.getEmail().equals(user.getEmail())) {
+				if (useritem.getContact() == user.getContact() 
+						|| useritem.getEmail().equals(user.getEmail())) {
 					isExist = true;
 				}
 			}
 		} catch (Exception e) {
 
 			e.printStackTrace();
-			throw new ValidationException("Unable to add");
+			throw new ValidationException("User already exists");
 		}
 		return isExist;
 	}
