@@ -36,15 +36,15 @@ public class RegistrationServlet extends HttpServlet {
 			
 			if(UserRegistration.userRegistration(newUser)) {
 				String successMessage = "You have registered successfully";
-				response.sendRedirect("UserLogin.jsp?successMessage="+successMessage);
+				response.sendRedirect("userLogin.jsp?successMessage="+successMessage);
 			}else {
 				String invalidMessage = "Invalid details";
-				response.sendRedirect("UserRegistration.jsp?invalidMessage="+invalidMessage);
+				response.sendRedirect("userRegistration.jsp?invalidMessage="+invalidMessage);
 			}
 			
 		}else {
 			String userMessage = "You are already a user";
-			response.sendRedirect("UserRegistration.jsp?userMessage="+userMessage);
+			response.sendRedirect("userRegistration.jsp?userMessage="+userMessage);
 			
 		}
 		

@@ -37,27 +37,39 @@ public class Login {
 		return validLogin;
 	}
 
+	/**
+	 * This method is used to verify if the user login credentials are valid
+	 * 
+	 * @param email
+	 * @param password
+	 * @return
+	 */
 	public static boolean isUserLoginValid(String email, String password) {
 		boolean isValid;
 		try {
 			LoginDao dao = new LoginDao();
 			isValid = dao.loginDao(email, password);
-			
-		}catch (DbException e) {
+
+		} catch (DbException e) {
 			e.printStackTrace();
 			throw new DbException("Invalid Credentials");
 		}
 		return isValid;
 	}
-	
-	
+
+	/**
+	 * This method is used to get user details
+	 * @param email
+	 * @param password
+	 * @return
+	 */
 	public static List<String> getuserDetails(String email, String password) {
 		List<String> userList = new ArrayList<>();
 		try {
 			LoginDao dao = new LoginDao();
 			userList = dao.getUserDetails(email, password);
-			
-		}catch (DbException e) {
+
+		} catch (DbException e) {
 			e.printStackTrace();
 			throw new DbException("Invalid Credentials");
 		}

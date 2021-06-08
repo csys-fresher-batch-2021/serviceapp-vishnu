@@ -64,7 +64,8 @@
 					if (admin == "admin") {
 					%>
 					<td><a
-						href="DeleteServices?serviceName=<%=service.getServiceName()%>&serviceCharge=<%=service.getServiceCharge()%>"
+						href="DeleteServices?serviceName=<%=service.getServiceName()%>
+						&serviceCharge=<%=service.getServiceCharge()%>"
 						class="btn btn-danger">Delete</a></td>
 					<%
 					}

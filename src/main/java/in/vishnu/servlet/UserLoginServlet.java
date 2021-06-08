@@ -11,23 +11,24 @@ import javax.servlet.http.HttpSession;
 
 import in.vishnu.services.Login;
 
-
 /**
  * Servlet implementation class UserLogin
  */
 @WebServlet("/UserLoginServlet")
 public class UserLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-   
+
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String userLogin = request.getParameter("email");
 		String password = request.getParameter("password");
-		
-		if(Login.isUserLoginValid(userLogin, password)) {
+
+		if (Login.isUserLoginValid(userLogin, password)) {
 			HttpSession session = request.getSession();
 			session.setAttribute("USER", "user");
 			session.setAttribute("sessionEmail", userLogin);
@@ -36,10 +37,10 @@ public class UserLoginServlet extends HttpServlet {
 			session.setAttribute("lastName", userDetails.get(1));
 			session.setAttribute("contact", userDetails.get(2));
 			String successMessage = "Login Success";
-			response.sendRedirect("homePage.jsp?successMessage="+successMessage);
-		}else {
+			response.sendRedirect("homePage.jsp?successMessage=" + successMessage);
+		} else {
 			String invalidMessage = "Invalid Login Credentials";
-			response.sendRedirect("UserLogin.jsp?invalidMessage="+invalidMessage);
+			response.sendRedirect("userLogin.jsp?invalidMessage=" + invalidMessage);
 		}
 	}
 

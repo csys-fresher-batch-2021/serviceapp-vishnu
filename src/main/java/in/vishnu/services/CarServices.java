@@ -2,7 +2,6 @@ package in.vishnu.services;
 
 import java.util.List;
 
-
 import in.vishnu.dao.ServicesDAO;
 import in.vishnu.exception.ServiceException;
 import in.vishnu.exception.ValidationException;
@@ -97,22 +96,22 @@ public class CarServices {
 			}
 
 		} catch (ServiceException e) {
-			e.printStackTrace();
 			String message = e.getMessage();
 			throw new ServiceException(message);
 		}
 
 		return isProcessTrue;
 	}
-	
+
 	/**
 	 * return service amount
+	 * 
 	 * @return
 	 */
 	public static int getServiceCharge(String serviceName) {
-		int charge=0;
+		int charge = 0;
 		try {
-			if(StringValidation.serviceNameValidation(serviceName)) {
+			if (StringValidation.serviceNameValidation(serviceName)) {
 				ServicesDAO dao = new ServicesDAO();
 				charge += dao.getServiceCharge(serviceName);
 			}
@@ -120,7 +119,7 @@ public class CarServices {
 			e.printStackTrace();
 			throw new ServiceException("unable to get charge");
 		}
-		
+
 		return charge;
 	}
 }

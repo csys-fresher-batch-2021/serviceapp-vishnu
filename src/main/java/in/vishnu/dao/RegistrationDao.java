@@ -14,12 +14,18 @@ import in.vishnu.util.ConnectionUtil;
 
 public class RegistrationDao {
 
+	/**
+	 * This method is to add a new user to database
+	 * 
+	 * @param user
+	 */
 	public void addUser(User user) {
 		Connection connection = null;
 		PreparedStatement pst = null;
 		try {
 			connection = ConnectionUtil.getConnection();
-			String sql = "insert into user_details(first_name, last_name, contact, email, password)values(?,?,?,?,?)";
+			String sql = "INSERT INTO user_details(first_name, last_name, contact,"
+					+ " email, password)VALUES(?,?,?,?,?)";
 			pst = connection.prepareStatement(sql);
 			pst.setString(1, user.getFirstName());
 			pst.setString(2, user.getLastName());
@@ -29,24 +35,29 @@ public class RegistrationDao {
 			pst.executeUpdate();
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-			throw new DbException("unable to add data");
+			throw new DbException("Unable to add data");
 		} finally {
 			ConnectionUtil.close(pst, connection);
 		}
 	}
 
+	/**
+	 * This method gets all users from database
+	 * 
+	 * @return
+	 */
 	public List<User> getAllUsers() {
-		
-		List <User> userList = new ArrayList<>();
+
+		List<User> userList = new ArrayList<>();
 		Connection connection = null;
 		PreparedStatement pst = null;
 		try {
 			connection = ConnectionUtil.getConnection();
-			String sql = "select * from user_details";
+			String sql = "SELECT * FROM user_details";
 			pst = connection.prepareStatement(sql);
 			ResultSet rs = pst.executeQuery();
-			while(rs.next()) {
-				
+			while (rs.next()) {
+
 				String firstName = rs.getString("first_name");
 				String lastName = rs.getString("last_name");
 				Long contact = rs.getLong("contact");
@@ -55,14 +66,13 @@ public class RegistrationDao {
 				User user = new User(firstName, lastName, contact, email, password);
 				userList.add(user);
 			}
-		}catch(ClassNotFoundException | SQLException e){
+		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-			throw new DbException("unable to get all users");
-		}finally {
+			throw new DbException("Unable to get all users");
+		} finally {
 			ConnectionUtil.close(pst, connection);
 		}
 		return userList;
-		
-		
+
 	}
 }

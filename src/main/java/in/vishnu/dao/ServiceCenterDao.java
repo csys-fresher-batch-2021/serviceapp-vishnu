@@ -12,63 +12,83 @@ import in.vishnu.model.ServiceCenter;
 import in.vishnu.util.ConnectionUtil;
 
 public class ServiceCenterDao {
-	
-	public void addServiceCenter(ServiceCenter serviceCenter ) {
-		Connection connection;
-		
+
+	/**
+	 * This method is used to add new service centers to database
+	 * 
+	 * @param serviceCenter
+	 */
+	public void addServiceCenter(ServiceCenter serviceCenter) {
+		Connection connection = null;
+		PreparedStatement pst = null;
+
 		try {
 			connection = ConnectionUtil.getConnection();
-			String sql = "insert into service_centers_db(center_name, location)values(?,?)";
-			try (PreparedStatement pst = connection.prepareStatement(sql)) {
-				pst.setString(1, serviceCenter.getCenterName());
-				pst.setString(2, serviceCenter.getLocation());
-				pst.executeUpdate();
-			}
+			String sql = "INSERT INTO service_centers_db(center_name, location)VALUES(?,?)";
+			pst = connection.prepareStatement(sql);
+			pst.setString(1, serviceCenter.getCenterName());
+			pst.setString(2, serviceCenter.getLocation());
+			pst.executeUpdate();
+
 		} catch (ClassNotFoundException | SQLException e) {
-						
+
 			e.printStackTrace();
-			throw new DbException("Unable to add");
+			throw new DbException("Unable to add to database");
+		} finally {
+			ConnectionUtil.close(pst, connection);
 		}
-		
+
 	}
-	
-	
+
+	/**
+	 * This method is used to remove service center from database
+	 * 
+	 * @param serviceCenter
+	 */
 	public void removeServiceCenter(ServiceCenter serviceCenter) {
 		Connection connection = null;
 		PreparedStatement pst = null;
 		try {
 			connection = ConnectionUtil.getConnection();
-			String sql = "delete from service_center_db where center_name=? AND location=?";
+			String sql = "DELETE FROM service_center_db WHERE center_name=? AND location=?";
 			pst = connection.prepareStatement(sql);
 			pst.setString(1, serviceCenter.getCenterName());
 			pst.setString(2, serviceCenter.getLocation());
 			pst.executeUpdate();
-		}catch(ClassNotFoundException | SQLException e){
+		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 			throw new DbException("Cannot delete service center");
-		}finally {
+		} finally {
 			ConnectionUtil.close(pst, connection);
-		}		
+		}
 	}
-	
+
+	/**
+	 * This method is used to get all service centers from database
+	 * 
+	 * @return
+	 */
 	public List<ServiceCenter> getAllServiceCenters() {
+		Connection connection = null;
+		PreparedStatement pst = null;
 		List<ServiceCenter> listOfServiceCenters = new ArrayList<>();
-		Connection connection;
 		try {
 			connection = ConnectionUtil.getConnection();
-			String sql = "select * from service_centers_db";
-			try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-				ResultSet rs = preparedStatement.executeQuery();
-				while(rs.next()) {
-					String serviceCenter = rs.getString("center_name");
-					String location = rs.getString("location");
-					ServiceCenter newCenter = new ServiceCenter(serviceCenter, location);
-					listOfServiceCenters.add(newCenter);
-				}
+			String sql = "SELECT * FROM service_centers_db";
+			pst = connection.prepareStatement(sql);
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+				String serviceCenter = rs.getString("center_name");
+				String location = rs.getString("location");
+				ServiceCenter newCenter = new ServiceCenter(serviceCenter, location);
+				listOfServiceCenters.add(newCenter);
 			}
+
 		} catch (ClassNotFoundException | SQLException e) {
-			
 			e.printStackTrace();
+			throw new DbException("Unable to get all service centers");
+		} finally {
+			ConnectionUtil.close(pst, connection);
 		}
 		return listOfServiceCenters;
 	}

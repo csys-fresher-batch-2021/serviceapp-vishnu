@@ -16,26 +16,26 @@ import in.vishnu.validation.StringValidation;
 @WebServlet("/SelectServiceCenter")
 public class ServiceCenterAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-   
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String carModel = request.getParameter("cars");
 		String selectedService = request.getParameter("services");
 		String registrationNumber = request.getParameter("regno");
-		if(StringValidation.isRegistrationNumberValid(registrationNumber)) {
+		if (StringValidation.isRegistrationNumberValid(registrationNumber)) {
 			HttpSession session = request.getSession();
 			session.setAttribute("registrationNumber", registrationNumber);
 			session.setAttribute("carModel", carModel);
 			session.setAttribute("selectedService", selectedService);
 			response.sendRedirect("serviceCenters.jsp");
-		}else {
+		} else {
 			String registrationNumberMessage = "Invalid Registration Number";
-			response.sendRedirect("homePage.jsp?registrationNumberMessage="+registrationNumberMessage);
+			response.sendRedirect("homePage.jsp?registrationNumberMessage=" + registrationNumberMessage);
 		}
 	}
 

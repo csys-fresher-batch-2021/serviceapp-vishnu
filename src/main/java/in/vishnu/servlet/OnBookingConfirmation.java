@@ -17,26 +17,27 @@ import in.vishnu.services.BookingDetailsService;
 @WebServlet("/OnBookingConfirmation")
 public class OnBookingConfirmation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-   
+
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		String sessionEmail = (String)session.getAttribute("sessionEmail");
-		String carType = (String)session.getAttribute("carModel");
-		String registerNum = (String)session.getAttribute("registrationNumber");
-		String typeOfService = (String)session.getAttribute("selectedService");
-		String stationName = (String)session.getAttribute("stationName");
+		String sessionEmail = (String) session.getAttribute("sessionEmail");
+		String carType = (String) session.getAttribute("carModel");
+		String registerNum = (String) session.getAttribute("registrationNumber");
+		String typeOfService = (String) session.getAttribute("selectedService");
+		String stationName = (String) session.getAttribute("stationName");
 		BookingDetails details = new BookingDetails(sessionEmail, carType, registerNum, typeOfService, stationName);
-		if(BookingDetailsService.confirmBooking(details)) {
+		if (BookingDetailsService.confirmBooking(details)) {
 			String confirmation = "Booking Confirmed";
-			response.sendRedirect("confirmationPage.jsp?confirmation="+confirmation);
-		}
-		else {
+			response.sendRedirect("confirmationPage.jsp?confirmation=" + confirmation);
+		} else {
 			String processFailed = "Unable to Book now";
-			response.sendRedirect("billing.jsp?processFailed="+processFailed);
+			response.sendRedirect("billing.jsp?processFailed=" + processFailed);
 		}
 	}
 

@@ -12,75 +12,76 @@ import in.vishnu.util.ConnectionUtil;
 
 public class CarDao {
 
+	/**
+	 * This method is used to add new car to database
+	 * 
+	 * @param carName
+	 */
 	public void addCar(String carName) {
-		Connection connection = null;
-		try {
-			connection = ConnectionUtil.getConnection();
-			String sql = ("insert into cars(available_cars)values(?)");
-			try (PreparedStatement pst = connection.prepareStatement(sql)) {
-				pst.setString(1, carName);
-				pst.executeUpdate();
-			} 
-		} catch (ClassNotFoundException | SQLException e) {
-			throw new DbException("unable to add");
-		}
-		
-	}
-
-	public void removeCar(String carName) {
 		Connection connection = null;
 		PreparedStatement pst = null;
 		try {
 			connection = ConnectionUtil.getConnection();
-			String sql = ("delete from cars where available_cars=?");
+			String sql = ("INSERT INTO cars(available_cars)VALUES(?)");
 			pst = connection.prepareStatement(sql);
 			pst.setString(1, carName);
 			pst.executeUpdate();
+
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-			throw new DbException("Unable to remove");
+			throw new DbException("Unable to add to Db");
 		} finally {
 			ConnectionUtil.close(pst, connection);
 		}
 
 	}
 
-	public List<String> displayCars() {
+	/**
+	 * This method is to remove car from database
+	 * 
+	 * @param carName
+	 */
+	public void removeCar(String carName) {
 		Connection connection = null;
-		List<String> carList = new ArrayList<>();
+		PreparedStatement pst = null;
 		try {
 			connection = ConnectionUtil.getConnection();
-			String sql = ("select * from cars");
-			try (PreparedStatement pst = connection.prepareStatement(sql)) {
-				ResultSet rs = pst.executeQuery();
-				while (rs.next()) {
-					String carName = rs.getString("available_cars");
-					carList.add(carName);
-				}
-			}
+			String sql = ("DELETE FROM cars WHERE available_cars=?");
+			pst = connection.prepareStatement(sql);
+			pst.setString(1, carName);
+			pst.executeUpdate();
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-			throw new DbException("Unable to fetch data");
+			throw new DbException("Unable to remove from Db");
+		} finally {
+			ConnectionUtil.close(pst, connection);
 		}
-		return carList;
+
 	}
 
+	/**
+	 * This method returns list of cars from database
+	 * 
+	 * @return
+	 */
 	public List<String> getAllCars() {
 		Connection connection = null;
+		PreparedStatement pst = null;
 		List<String> listOfCars = new ArrayList<>();
 		try {
 			connection = ConnectionUtil.getConnection();
-			String sql = ("select * from cars");
-			try (PreparedStatement pst = connection.prepareStatement(sql)) {
-				ResultSet rs = pst.executeQuery();
-				while (rs.next()) {
-					String carName = rs.getString("available_cars");
-					listOfCars.add(carName);
-				}
+			String sql = ("SELECT * FROM cars");
+			pst = connection.prepareStatement(sql);
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+				String carName = rs.getString("available_cars");
+				listOfCars.add(carName);
 			}
+
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 			throw new DbException("Unable to fetch data");
+		} finally {
+			ConnectionUtil.close(pst, connection);
 		}
 		return listOfCars;
 	}

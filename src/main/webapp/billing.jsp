@@ -20,7 +20,7 @@
 	String selectedService = (String) session.getAttribute("selectedService");
 	String registrationNumber = (String) session.getAttribute("registrationNumber");
 	Integer fare = (Integer) session.getAttribute("finalFare");
-	
+
 	String notConfirmMessage = request.getParameter("processFailed");
 	if (notConfirmMessage != null) {
 		out.println("<font color='red'>" + notConfirmMessage + "</font>");
@@ -86,11 +86,16 @@
 		</div>
 	</form>
 	<form action="OnBookingConfirmation" method="post">
-		<%if(fare!=null){ %>
-	<div class="text-right">
-		<button type="submit" class="btn btn-success">Confirm Booking</button>
-	</div>
+		<%
+		if (fare != null) {
+		%>
+		<div class="text-right">
+			<button type="submit" class="btn btn-success">Confirm
+				Booking</button>
+		</div>
 	</form>
-	<%} %>
+	<%
+	}
+	%>
 </body>
 </html>
