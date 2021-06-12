@@ -26,7 +26,9 @@ public class AddServiceCenter extends HttpServlet {
 			throws ServletException, IOException {
 		String centerName = request.getParameter("servicecenter");
 		String location = request.getParameter("location");
-		ServiceCenter newServiceCenter = new ServiceCenter(centerName, location);
+		ServiceCenter newServiceCenter = new ServiceCenter();
+		newServiceCenter.setCenterName(centerName);
+		newServiceCenter.setLocation(location);
 		boolean isStationNameValid = ServiceCenters.addServiceCenter(newServiceCenter);
 		if (isStationNameValid) {
 			String successMessage = "Successfully Added";

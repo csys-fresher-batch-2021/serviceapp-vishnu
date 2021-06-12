@@ -31,7 +31,7 @@ String user = (String) session.getAttribute("USER");
 		%>
 
 		<%
-		if (admin == null && user != null) {
+		if (admin == null && user != null && registrationNumber != null && selectedService != null) {
 		%>
 		<label for="username"> User Name:</label> <input type="text"
 			name="contact" value="<%=userName%>" readonly> <label
@@ -54,7 +54,7 @@ String user = (String) session.getAttribute("USER");
 					<th scope="col">S.no</th>
 					<th scope="col">Name</th>
 					<th scope="col">Location</th>
-					<th scope="col"></th>
+
 				</tr>
 			</thead>
 			<tbody>
@@ -69,18 +69,17 @@ String user = (String) session.getAttribute("USER");
 					<td><%=serviceCenterItem.getCenterName()%></td>
 
 					<td><%=serviceCenterItem.getLocation()%></td>
+
 					<%
-					if (admin == null && user != null) {
+					if (admin == null && user != null && registrationNumber != null && selectedService != null) {
 					%>
 
 					<td><input type="radio" name="center"
 						value="<%=serviceCenterItem.getCenterName() + ", " + serviceCenterItem.getLocation()%>"
 						required></td>
-					<%
-					}
-					%>
 				</tr>
 				<%
+				}
 				}
 				%>
 
@@ -88,7 +87,7 @@ String user = (String) session.getAttribute("USER");
 		</table>
 		<div class="text-center">
 			<%
-			if (admin == null && user != null) {
+			if (admin == null && user != null && registrationNumber != null && selectedService != null) {
 			%>
 			<button type="submit" class="btn btn-danger">Submit</button>
 			<%

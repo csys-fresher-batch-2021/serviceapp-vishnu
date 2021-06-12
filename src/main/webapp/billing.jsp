@@ -36,48 +36,50 @@
 				</tr>
 
 			</thead>
-			<tr>
-				<td>User Name</td>
-				<td><%=userName%></td>
-			</tr>
-			<tr>
-				<td>Contact</td>
-				<td><%=contact%></td>
-			</tr>
-			<tr>
-				<td>Your Car</td>
-				<td><%=carModel%></td>
-			</tr>
-			<tr>
-				<td>Registration Number</td>
-				<td><%=registrationNumber%></td>
-			</tr>
-			<tr>
-				<td>Service Type</td>
-				<td><%=selectedService%></td>
-			</tr>
-			<tr>
-				<td>Service Center</td>
-				<td><%=serviceStation%></td>
-			</tr>
-			<tr>
-				<td>Your Estimated Price</td>
+			<tbody>
+				<tr>
+					<td>User Name</td>
+					<td><%=userName%></td>
+				</tr>
+				<tr>
+					<td>Contact</td>
+					<td><%=contact%></td>
+				</tr>
+				<tr>
+					<td>Your Car</td>
+					<td><%=carModel%></td>
+				</tr>
+				<tr>
+					<td>Registration Number</td>
+					<td><%=registrationNumber%></td>
+				</tr>
+				<tr>
+					<td>Service Type</td>
+					<td><%=selectedService%></td>
+				</tr>
+				<tr>
+					<td>Service Center</td>
+					<td><%=serviceStation%></td>
+				</tr>
+				<tr>
+					<td>Your Estimated Price</td>
+					<%
+					if (fare != null) {
+					%>
+					<td><%=fare%> Rs</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><p class="text-muted">
+							<em>NOTE: this is an estimated price.<br>The *price may
+								vary at station
+							</em>
+						</p></td>
+				</tr>
 				<%
-				if (fare != null) {
+				}
 				%>
-				<td><%=fare%> Rs</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td><p class="text-muted">
-						<em>NOTE: this is an estimated price.<br>The *price may
-							vary at station
-						</em>
-					</p></td>
-			</tr>
-			<%
-			}
-			%>
+			</tbody>
 
 		</table>
 		<div class="text-center">

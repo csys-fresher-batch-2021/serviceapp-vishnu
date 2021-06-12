@@ -46,8 +46,7 @@ public class UserRegistration {
 			RegistrationDao dao = new RegistrationDao();
 			List<User> newList = dao.getAllUsers();
 			for (User useritem : newList) {
-				if (useritem.getContact() == user.getContact() 
-						|| useritem.getEmail().equals(user.getEmail())) {
+				if (useritem.getContact() == user.getContact() || useritem.getEmail().equals(user.getEmail())) {
 					isExist = true;
 				}
 			}

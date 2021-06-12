@@ -9,30 +9,33 @@ import in.vishnu.validation.StringValidation;
 
 public class ServiceCenters {
 	private ServiceCenters() {
-		
+
 	}
+
 	/**
 	 * This method is used to lists all service centers
+	 * 
 	 * @return list
 	 */
-	public static List<ServiceCenter> showServiceCenters(){
+	public static List<ServiceCenter> showServiceCenters() {
 		ServiceCenterDao dao = new ServiceCenterDao();
 		return dao.getAllServiceCenters();
 	}
-	
+
 	/**
 	 * This method is used to add new service center
+	 * 
 	 * @param serviceCenter
 	 * @return boolean
 	 */
 	public static boolean addServiceCenter(ServiceCenter serviceCenter) {
 		boolean isDone = false;
 		try {
-			if(StringValidation.isServiceCenterNameValid(serviceCenter.getCenterName()) 
+			if (StringValidation.isServiceCenterNameValid(serviceCenter.getCenterName())
 					&& StringValidation.isNameValid(serviceCenter.getLocation())) {
 				ServiceCenterDao dao = new ServiceCenterDao();
 				dao.addServiceCenter(serviceCenter);
-				isDone=true;
+				isDone = true;
 			}
 		} catch (DbException e) {
 			e.printStackTrace();
@@ -40,9 +43,10 @@ public class ServiceCenters {
 		}
 		return isDone;
 	}
-	
+
 	/**
 	 * This method is used to remove the service center details
+	 * 
 	 * @param serviceCenter
 	 * @return
 	 */
@@ -52,12 +56,12 @@ public class ServiceCenters {
 			ServiceCenterDao dao = new ServiceCenterDao();
 			List<ServiceCenter> newList = dao.getAllServiceCenters();
 			for (ServiceCenter serviceCenterItem : newList) {
-				if(serviceCenterItem.getCenterName().equals(serviceCenter.getCenterName()) &&
-						serviceCenterItem.getLocation().equals(serviceCenter.getLocation())) {
-					isProcessDone=true;
+				if (serviceCenterItem.getCenterName().equals(serviceCenter.getCenterName())
+						&& serviceCenterItem.getLocation().equals(serviceCenter.getLocation())) {
+					isProcessDone = true;
 				}
 			}
-			if(isProcessDone) {
+			if (isProcessDone) {
 				dao.removeServiceCenter(serviceCenter);
 			}
 		} catch (Exception e) {
@@ -65,7 +69,7 @@ public class ServiceCenters {
 			throw new DbException("unable to remove");
 		}
 		return isProcessDone;
-		
+
 	}
 
 }

@@ -31,14 +31,6 @@
 					<th scope="col">S.no</th>
 					<th scope="col">Services</th>
 					<th scope="col">Charge(in Rs)</th>
-					<%
-					if (user == "user") {
-					%>
-					<th scope="col">Quick Book</th>
-					<%
-					}
-					%>
-					<th scope="col"></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -53,13 +45,6 @@
 					<td><%=i%></td>
 					<td><%=service.getServiceName()%></td>
 					<td><%=service.getServiceCharge()%></td>
-					<%
-					if (user == "user") {
-					%>
-					<td><button type="submit">Book Now</button></td>
-					<%
-					}
-					%>
 					<%
 					if (admin == "admin") {
 					%>

@@ -24,31 +24,29 @@ public class RegistrationServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		String firstName = request.getParameter("firstname");
 		String lastName = request.getParameter("lastname");
 		Long contact = Long.parseLong(request.getParameter("contact"));
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		User newUser = new User(firstName, lastName, contact, email, password);
-		
-		if(!UserRegistration.isUserExist(newUser)) {
-			
-			if(UserRegistration.userRegistration(newUser)) {
+
+		if (!UserRegistration.isUserExist(newUser)) {
+
+			if (UserRegistration.userRegistration(newUser)) {
 				String successMessage = "You have registered successfully";
-				response.sendRedirect("userLogin.jsp?successMessage="+successMessage);
-			}else {
+				response.sendRedirect("userLogin.jsp?successMessage=" + successMessage);
+			} else {
 				String invalidMessage = "Invalid details";
-				response.sendRedirect("userRegistration.jsp?invalidMessage="+invalidMessage);
+				response.sendRedirect("userRegistration.jsp?invalidMessage=" + invalidMessage);
 			}
-			
-		}else {
+
+		} else {
 			String userMessage = "You are already a user";
-			response.sendRedirect("userRegistration.jsp?userMessage="+userMessage);
-			
+			response.sendRedirect("userRegistration.jsp?userMessage=" + userMessage);
+
 		}
-		
-		
 
 	}
 
