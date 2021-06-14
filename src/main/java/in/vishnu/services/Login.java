@@ -59,6 +59,7 @@ public class Login {
 
 	/**
 	 * This method is used to get user details
+	 * 
 	 * @param email
 	 * @param password
 	 * @return

@@ -33,8 +33,12 @@ public class OnBookingConfirmation extends HttpServlet {
 		String stationName = (String) session.getAttribute("stationName");
 		BookingDetails details = new BookingDetails(sessionEmail, carType, registerNum, typeOfService, stationName);
 		if (BookingDetailsService.confirmBooking(details)) {
-			String confirmation = "Booking Confirmed";
-			response.sendRedirect("confirmationPage.jsp?confirmation=" + confirmation);
+			session.removeAttribute("carModel");
+			session.removeAttribute("registrationNumber");
+			session.removeAttribute("selectedService");
+			session.removeAttribute("finalFare");
+			String message = "Booking Confirmed";
+			response.sendRedirect("confirmationPage.jsp?message=" + message);
 		} else {
 			String processFailed = "Unable to Book now";
 			response.sendRedirect("billing.jsp?processFailed=" + processFailed);

@@ -12,12 +12,14 @@
 	<h1 class="text-center">Booking Confirmed</h1>
 	<h6 class="text-center">We are pleased to inform you that your
 		booking has been confirmed!</h6>
-	<img alt="" class="rounded mx-auto d-block"
-		src="file:///E:/serviceapp-vishnu/img/confirmationTick.gif"
+	<img
+		alt="https://cdn.dribbble.com/users/5549533/screenshots/12219533/true_two.gif"
+		class="rounded mx-auto d-block"
+		src="https://cdn.dribbble.com/users/5549533/screenshots/12219533/true_two.gif"
 		width="30%">
 	<h5 class="text-center">
-		Visit <a href="myBookings.jsp">My Bookings</a> to check your service
-		booking
+		Visit <a href="recentBookings.jsp">My Bookings</a> to check your
+		service booking
 	</h5>
 </body>
 </html>

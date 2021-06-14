@@ -1,9 +1,10 @@
 package in.vishnu.validation;
 
 public class PasswordValidation {
-	private PasswordValidation(){
-		
+	private PasswordValidation() {
+
 	}
+
 	/**
 	 * returns true if password is valid
 	 * 

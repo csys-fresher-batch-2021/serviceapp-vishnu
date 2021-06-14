@@ -24,7 +24,7 @@ public class ServiceCenterDao {
 
 		try {
 			connection = ConnectionUtil.getConnection();
-			String sql = "INSERT INTO service_centers_db(center_name, location)VALUES(?,?)";
+			String sql = "INSERT INTO service_centers_db(center_name, location" + ")VALUES(?,?)";
 			pst = connection.prepareStatement(sql);
 			pst.setString(1, serviceCenter.getCenterName());
 			pst.setString(2, serviceCenter.getLocation());
@@ -64,8 +64,7 @@ public class ServiceCenterDao {
 	}
 
 	/**
-	 * This method is used to get all service centers from database
-	 * 
+	 * This method is used to get all service centers
 	 * @return
 	 */
 	public List<ServiceCenter> getAllServiceCenters() {
@@ -74,13 +73,15 @@ public class ServiceCenterDao {
 		List<ServiceCenter> listOfServiceCenters = new ArrayList<>();
 		try {
 			connection = ConnectionUtil.getConnection();
-			String sql = "SELECT * FROM service_centers_db";
+			String sql = "SELECT center_name, location FROM service_centers_db";
 			pst = connection.prepareStatement(sql);
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
 				String serviceCenter = rs.getString("center_name");
 				String location = rs.getString("location");
-				ServiceCenter newCenter = new ServiceCenter(serviceCenter, location);
+				ServiceCenter newCenter = new ServiceCenter();
+				newCenter.setCenterName(serviceCenter);
+				newCenter.setLocation(location);
 				listOfServiceCenters.add(newCenter);
 			}
 
