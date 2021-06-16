@@ -24,7 +24,7 @@ public class ServiceCenterDao {
 
 		try {
 			connection = ConnectionUtil.getConnection();
-			String sql = "INSERT INTO service_centers_db(center_name, location" + ")VALUES(?,?)";
+			String sql = "INSERT INTO service_centers_db(center_name, location)VALUES(?,?)";
 			pst = connection.prepareStatement(sql);
 			pst.setString(1, serviceCenter.getCenterName());
 			pst.setString(2, serviceCenter.getLocation());

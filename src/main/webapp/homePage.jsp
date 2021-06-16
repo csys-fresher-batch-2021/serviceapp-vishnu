@@ -13,7 +13,7 @@
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
-	<main class="container-fluid"></main>
+	<main class="container-fluid">
 	<h3>Quick Book</h3>
 	<%
 	String successMessage = request.getParameter("successMessage");
@@ -58,6 +58,6 @@
 		<button type="submit">Book Now</button>
 
 	</form>
-
+</main>
 </body>
 </html>

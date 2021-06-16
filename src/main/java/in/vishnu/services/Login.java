@@ -1,25 +1,21 @@
 package in.vishnu.services;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import in.vishnu.dao.LoginDao;
 import in.vishnu.exception.DbException;
-import in.vishnu.util.Util;
+import in.vishnu.exception.ServiceException;
+import in.vishnu.validation.EmailValidation;
+import in.vishnu.validation.PasswordValidation;
 
 public class Login {
 	private Login() {
 		// default constructor
 	}
 
-	private static final HashMap<String, String> adminCredential = new HashMap<>();
-	static {
-		adminCredential.put("admin123@gmail.com", "admin1234");
-	}
-
 	/**
-	 * returns true if admin login credentials are valid
+	 * This method returns true if admin login credentials are valid
 	 * 
 	 * @param adminUserName
 	 * @param password
@@ -27,12 +23,14 @@ public class Login {
 	 */
 	public static boolean isAdminLoginValid(String adminUserName, String password) {
 		boolean validLogin = false;
-		if (Util.isEmailValid(adminUserName) && Util.isPasswordStrong(password)
-				&& adminCredential.containsKey(adminUserName)) {
-			String adminPassword = adminCredential.get(adminUserName);
-			if (adminPassword.equals(password)) {
-				validLogin = true;
+		try {
+			if (EmailValidation.isEmailValid(adminUserName) && PasswordValidation.isPasswordStrong(password)) {
+				LoginDao dao = new LoginDao();
+				validLogin = dao.adminLogin(adminUserName, password);
 			}
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			throw new ServiceException("Unable to login");
 		}
 		return validLogin;
 	}

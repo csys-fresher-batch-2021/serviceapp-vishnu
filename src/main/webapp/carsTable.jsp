@@ -8,7 +8,7 @@
 <meta charset="ISO-8859-1">
 <title>Cars</title>
 </head>
-<body>
+<body class="text-center">
 	<%
 	String admin = (String) session.getAttribute("ADMIN");
 	%>
@@ -17,7 +17,7 @@
 	%>
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
-		<h3>List of Services</h3>
+		<h3>List of Cars</h3>
 
 
 		<%
@@ -33,12 +33,12 @@
 		%>
 
 
-		<table class="table table-bordered">
+		<table class="table table-striped">
 			<caption>Available cars</caption>
-			<thead>
+			<thead class="thead-dark">
 				<tr>
-					<th scope="col">S.no</th>
-					<th scope="col">cars</th>
+					<th scope="col">S.NO</th>
+					<th scope="col">CARS</th>
 					<th scope="col"></th>
 				</tr>
 			</thead>

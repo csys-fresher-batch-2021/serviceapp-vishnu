@@ -8,10 +8,10 @@
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
-	<main class="container-fluid"></main>
+	<main class="container-fluid">
 
-	<h4>Welcome to AXLES</h4>
-	<p>A car service Application</p>
-
+		<h4>Welcome to AXLES</h4>
+		<p>A car service Application</p>
+	</main>
 </body>
 </html>

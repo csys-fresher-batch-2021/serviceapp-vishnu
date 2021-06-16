@@ -21,7 +21,8 @@ public class EmailValidation {
 				frequencyOfAt++;
 			}
 		}
-		if (emailLength == 0 || indexOfAt == 0 || indexOfAt == emailLength - 1 || frequencyOfAt > 1 || emailLength > 65
+		if (emailLength == 0 || indexOfAt == 0 || indexOfAt == emailLength - 1 
+				|| frequencyOfAt > 1 || emailLength > 65
 				|| email.charAt(indexOfAt + 1) == '.') {
 			isValid = false;
 		}

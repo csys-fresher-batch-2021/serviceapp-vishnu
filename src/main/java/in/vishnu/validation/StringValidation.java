@@ -94,7 +94,9 @@ public class StringValidation {
 	 */
 	public static boolean isServiceCenterNameValid(String serviceCenterName) {
 		boolean isValid = true;
-		if (serviceCenterName.trim().equals("") || serviceCenterName.length() < 3 || serviceCenterName.length() > 100) {
+		if (serviceCenterName.trim().equals("") 
+				|| serviceCenterName.length() < 3 
+				|| serviceCenterName.length() > 100){
 			isValid = false;
 		}
 		return isValid;

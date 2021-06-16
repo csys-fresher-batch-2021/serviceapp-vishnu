@@ -32,7 +32,7 @@ public class UpdateBookingStatus extends HttpServlet {
 		if (isDone && status.equals("CANCELLED")) {
 			response.sendRedirect("recentBookings.jsp");
 		} else if (isDone && status.equals("COMPLETED")) {
-			response.sendRedirect("bookings.jsp");
+			response.sendRedirect("adminCompletedBookings.jsp");
 		}
 	}
 

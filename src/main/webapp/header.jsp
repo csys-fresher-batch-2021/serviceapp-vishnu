@@ -72,8 +72,22 @@ String registrationNumber = (String) session.getAttribute("registrationNumber");
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 				<li class="nav-item"><a class="nav-link" href="carsTable.jsp">Cars</a>
 				</li>
-				<li class="nav-item"><a class="nav-link" href="bookings.jsp">User
-						Bookings</a></li>
+
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="#" id="dropdownId"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">USER
+						BOOKINGS</a>
+					<div class="dropdown-menu" aria-labelledby="dropdownId">
+						<a class="dropdown-item" href="adminConfirmedBookings.jsp">Confirmed
+							bookings</a> <a class="dropdown-item"
+							href="adminCompletedBookings.jsp">Completed Services</a> <a
+							class="dropdown-item" href="adminDeliveredServices.jsp">Delivered
+							Services</a> <a class="dropdown-item"
+							href="adminCancelledBookings.jsp">Cancelled Bookings</a>
+					</div></li>
+
+
+
 				<li class="nav-item"><a class="nav-link" href="addServices.jsp">Add
 						new Detail</a></li>
 			</ul>
@@ -92,8 +106,7 @@ String registrationNumber = (String) session.getAttribute("registrationNumber");
 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PROFILE</a>
 
 					<div class="dropdown-menu" aria-labelledby="dropdownId">
-						<a class="dropdown-item" href="#">Profile</a> <a
-							class="dropdown-item" href="recentBookings.jsp">Recent
+						<a class="dropdown-item" href="recentBookings.jsp">Recent
 							Bookings</a> <a class="dropdown-item" href="completedServices.jsp">Completed
 							Services</a> <a class="dropdown-item" href="cancelledServices.jsp">Cancelled
 							bookings</a>

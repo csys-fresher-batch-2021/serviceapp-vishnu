@@ -16,7 +16,8 @@ public class ContactValidation {
 		String contactString = String.valueOf(contact);
 		int contactLength = contactString.length();
 		if (contactLength == 10
-				&& (contactString.startsWith("7") || contactString.startsWith("8") || contactString.startsWith("9"))) {
+				&& (contactString.startsWith("7") || contactString.startsWith("8") 
+						|| contactString.startsWith("9"))) {
 			isValid = true;
 		}
 		return isValid;

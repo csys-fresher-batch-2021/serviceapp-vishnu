@@ -10,13 +10,14 @@ public class UserBooking {
 	private String serviceCenter;
 	private String bookingStatus;
 	private LocalDate date;
+	private String deliveryDate;
 
 	public UserBooking() {
 		super();
 	}
 
 	public UserBooking(String carName, String registrationNumber, String serviceType, int serviceCharge,
-			String serviceCenter, String bookingStatus, LocalDate date) {
+			String serviceCenter, String bookingStatus, LocalDate date, String deliveryDate) {
 		super();
 		this.carName = carName;
 		this.registrationNumber = registrationNumber;
@@ -25,6 +26,7 @@ public class UserBooking {
 		this.serviceCenter = serviceCenter;
 		this.bookingStatus = bookingStatus;
 		this.date = date;
+		this.deliveryDate = deliveryDate;
 	}
 
 	public String getCarName() {
@@ -83,11 +85,19 @@ public class UserBooking {
 		this.date = date;
 	}
 
+	public String getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	public void setDeliveryDate(String deliveryDate) {
+		this.deliveryDate = deliveryDate;
+	}
+
 	@Override
 	public String toString() {
-		return "MyBooking [carName=" + carName + ", registrationNumber=" + registrationNumber + ", serviceType="
+		return "UserBooking [carName=" + carName + ", registrationNumber=" + registrationNumber + ", serviceType="
 				+ serviceType + ", serviceCharge=" + serviceCharge + ", serviceCenter=" + serviceCenter
-				+ ", bookingStatus=" + bookingStatus + ", date=" + date + "]";
+				+ ", bookingStatus=" + bookingStatus + ", date=" + date + ", deliveryDate=" + deliveryDate + "]";
 	}
 
 }

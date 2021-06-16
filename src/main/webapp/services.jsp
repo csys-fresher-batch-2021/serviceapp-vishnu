@@ -15,7 +15,7 @@
 	%>
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
-		<h3>List of Services</h3>
+		<h3 class="text-center">List of Services</h3>
 		<%
 		String infoMessage = request.getParameter("message");
 		if (infoMessage != null) {
@@ -24,13 +24,14 @@
 		%>
 
 
-		<table class="table table-bordered">
+		<table class="table table-striped">
 			<caption>Available Services</caption>
-			<thead>
+			<thead class="thead-dark">
 				<tr>
 					<th scope="col">S.no</th>
 					<th scope="col">Services</th>
 					<th scope="col">Charge(in Rs)</th>
+					<th scope="col"></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -56,7 +57,7 @@
 					}
 					%>
 				</tr>
-
+				
 				<%
 				}
 				%>
