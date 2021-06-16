@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import in.vishnu.validation.PasswordValidation;
+
 class PasswordValidationTest {
 
 	/**
@@ -16,7 +18,7 @@ class PasswordValidationTest {
 		"adm, adm min,''"
 	})
 	void invalidPasswordCase(String password) {
-		boolean isValid = Util.isPasswordStrong(password);
+		boolean isValid = PasswordValidation.isPasswordStrong(password);
 		assertFalse(isValid);
 	}
 	
@@ -26,7 +28,7 @@ class PasswordValidationTest {
 		"admin1234, anirudh1, aashikahamed"
 	})
 	void ValidPasswordCase(String password) {
-		boolean isValid = Util.isPasswordStrong(password);
+		boolean isValid = PasswordValidation.isPasswordStrong(password);
 		assertTrue(isValid);
 	}
 	

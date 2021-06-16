@@ -14,6 +14,16 @@ values('jacob', 'james', 9879564356, 'jacob@gmail.com', 'jacobjames123')
 insert into user_details(first_name, last_name, contact, email, password)
 values('rahul', 'raj', 9879564359, 'rahul@gmail.com', 'rahulraj123')
 
+-------Admin details table-----
+--------------------------------
+create table admin_details(
+	s_no serial not null primary Key,
+	admin_email varchar(100) not null unique,
+	admin_password varchar(100) not null
+);
+
+insert into admin_details(admin_email, admin_password)values('admin123@gmail.com', 'admin1234')
+
 
 ----------cars table--------
 ----------------------------
@@ -56,7 +66,12 @@ insert into services(service_id,service_name, service_charge)values(nextval('ser
 ----------------------------------------
 create table service_centers_db(
 	center_name varchar(100),
-	location varchar(50)
+	location varchar(50),
+	five_star int not null default 0,
+	four_star int not null default 0,
+	three_star int not null default 0,
+	two_star int not null default 0,
+	one_star int not null default 1
 );
 insert into service_centers_db(center_name, location)values('auto barrack service station', 'chennai'); 
 insert into service_center_db(center_name, location)values('automech car service station', 'chennai');

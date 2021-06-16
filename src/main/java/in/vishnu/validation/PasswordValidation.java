@@ -14,7 +14,8 @@ public class PasswordValidation {
 	public static boolean isPasswordStrong(String password) {
 		boolean isStrong = false;
 		int passwordLength = password.length();
-		if (password.equals(password.replace(" ", "")) && passwordLength > 8 && passwordLength < 50) {
+		if (password.equals(password.replace(" ", "")) 
+				&& passwordLength > 8 && passwordLength < 50) {
 			isStrong = true;
 		}
 

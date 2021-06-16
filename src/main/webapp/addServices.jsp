@@ -3,7 +3,7 @@
 <head>
 <title>Car Services App</title>
 </head>
-<body>
+<body class="text-center">
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
 		<h3>ADD TO DATABASE HERE</h3>

@@ -29,13 +29,14 @@ public class BookingDetailsDAO {
 			connection = ConnectionUtil.getConnection();
 			String sql = "INSERT INTO booking_details(booking_id, email_id, car_name, "
 					+ "registration_no, service_type, service_center, booking_status)"
-					+ "VALUES(NEXTVAL('booking_id_sequence'), ?,?,?,?,?,'CONFIRMED')";
+					+ "VALUES(NEXTVAL('booking_id_sequence'), ?,?,?,?,?,?)";
 			pst = connection.prepareStatement(sql);
 			pst.setString(1, booking.getEmailId());
 			pst.setString(2, booking.getCarName());
 			pst.setString(3, booking.getRegistrationNumber());
 			pst.setString(4, booking.getServiceType());
 			pst.setString(5, booking.getServiceCenter());
+			pst.setString(6, "CONFIRMED");
 			pst.executeUpdate();
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
@@ -58,7 +59,7 @@ public class BookingDetailsDAO {
 		try {
 			connection1 = ConnectionUtil.getConnection();
 			String sql = "SELECT car_name, registration_no, service_type, services.service_charge as charge, "
-					+ "service_center, booking_status, booking_date FROM booking_details "
+					+ "service_center, booking_status, booking_date, delivery_date FROM booking_details "
 					+ "INNER JOIN services ON booking_details.service_type = services.service_name "
 					+ "WHERE email_id=? ORDER BY booking_id ASC";
 			pst1 = connection1.prepareStatement(sql);
@@ -72,8 +73,9 @@ public class BookingDetailsDAO {
 				String serviceCenter = rs.getString("service_center");
 				String bookingStatus = rs.getString("booking_status");
 				LocalDate date = rs.getDate("booking_date").toLocalDate();
+				String deliveryDate = rs.getString("delivery_date");
 				UserBooking newBooking = new UserBooking(carName, registrationNumber, serviceType, serviceCharge,
-						serviceCenter, bookingStatus, date);
+						serviceCenter, bookingStatus, date, deliveryDate);
 				newList.add(newBooking);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
@@ -97,7 +99,7 @@ public class BookingDetailsDAO {
 		PreparedStatement pst = null;
 		try {
 			connection = ConnectionUtil.getConnection();
-			String sql = "select * from booking_details ORDER BY booking_id DESC";
+			String sql = "SELECT * FROM booking_details ORDER BY booking_id DESC";
 			pst = connection.prepareStatement(sql);
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
@@ -110,6 +112,7 @@ public class BookingDetailsDAO {
 				String status = rs.getString("booking_status");
 				String date = rs.getDate("booking_date").toLocalDate().toString();
 				String time = rs.getTime("booking_time").toLocalTime().toString();
+				String deliveryDate = rs.getString("delivery_date");
 				ArrayList<String> valuesList = new ArrayList<>();
 				valuesList.add(id);
 				valuesList.add(email);
@@ -120,6 +123,7 @@ public class BookingDetailsDAO {
 				valuesList.add(status);
 				valuesList.add(date);
 				valuesList.add(time);
+				valuesList.add(deliveryDate);
 				listOfBookings.add(valuesList);
 			}
 
@@ -160,6 +164,31 @@ public class BookingDetailsDAO {
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 			throw new DbException("Unable to update");
+		} finally {
+			ConnectionUtil.close(pst, connection);
+		}
+
+	}
+
+	/**
+	 * This method is to update delivery date
+	 * 
+	 * @param deliveryDate
+	 * @param bookingId
+	 */
+	public void updateDeliveryDate(String deliveryDate, int bookingId) {
+		Connection connection = null;
+		PreparedStatement pst = null;
+		try {
+			connection = ConnectionUtil.getConnection();
+			String sql = "UPDATE booking_details SET delivery_date = ? WHERE booking_id = ?";
+			pst = connection.prepareStatement(sql);
+			pst.setString(1, deliveryDate);
+			pst.setInt(2, bookingId);
+			pst.executeUpdate();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			throw new DbException("Unable to update delivery date");
 		} finally {
 			ConnectionUtil.close(pst, connection);
 		}

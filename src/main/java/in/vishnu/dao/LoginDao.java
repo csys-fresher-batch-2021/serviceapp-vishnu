@@ -80,4 +80,34 @@ public class LoginDao {
 
 		return userList;
 	}
+
+	/**
+	 * This method is use to admin login
+	 * 
+	 * @param email
+	 * @param password
+	 * @return
+	 */
+	public boolean adminLogin(String email, String password) {
+		boolean isDone = false;
+		Connection connection = null;
+		PreparedStatement pst = null;
+		try {
+			connection = ConnectionUtil.getConnection();
+			String sql = "SELECT * FROM admin_details WHERE admin_email=? AND admin_password=?";
+			pst = connection.prepareStatement(sql);
+			pst.setString(1, email);
+			pst.setString(2, password);
+			ResultSet rs = pst.executeQuery();
+			if (rs.next()) {
+				isDone = true;
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			throw new DbException("Unable to Login");
+		} finally {
+			ConnectionUtil.close(pst, connection);
+		}
+		return isDone;
+	}
 }

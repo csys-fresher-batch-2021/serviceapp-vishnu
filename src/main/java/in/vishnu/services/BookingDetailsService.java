@@ -175,4 +175,24 @@ public class BookingDetailsService {
 		}
 		return cancelledList;
 	}
+
+	/**
+	 * This method is used to update delivery date
+	 * @param deliveryDate
+	 * @param bookingId
+	 */
+	public static boolean updateDeliveryDate(String deliveryDate, int bookingId) {
+		boolean isDone = false;
+		try {
+			if (deliveryDate != null && bookingId != 0) {
+				BookingDetailsDAO dao5 = new BookingDetailsDAO();
+				dao5.updateDeliveryDate(deliveryDate, bookingId);
+				isDone = true;
+			}
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			throw new ServiceException("Unable to get delivery date and booking id");
+		}
+		return isDone;
+	}
 }
