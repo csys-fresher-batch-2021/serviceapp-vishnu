@@ -23,11 +23,12 @@ public class OnRatingAction extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		int rating = Integer.valueOf(request.getParameter("rate"));
 
-		String centerName = request.getParameter("center");
+		int rating = Integer.parseInt(request.getParameter("rate"));
+		int centerId = Integer.parseInt(request.getParameter("centerId"));
+		int bookingId = Integer.parseInt(request.getParameter("bookingId"));
 
-		boolean rated = Ratings.updateRating(rating, centerName);
+		boolean rated = Ratings.updateRating(centerId, bookingId, rating);
 		if (rated) {
 			String ratedMessage = "Thank you for rating";
 			response.sendRedirect("completedServices.jsp?ratedMessage=" + ratedMessage);

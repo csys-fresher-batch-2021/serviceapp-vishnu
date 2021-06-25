@@ -66,8 +66,14 @@
 								<option value="3">3 Stars</option>
 								<option value="4">4 Stars</option>
 								<option value="5">5 Stars</option>
-							</select> <input type="hidden" name="center"
-								value="<%=userBooking.getServiceCenter()%>">
+							</select> 
+							<input type="hidden" name="center" value="<%=userBooking.getServiceCenter()%>">
+								<%System.out.println(userBooking.getServiceCenter()); %> 
+							<input type="hidden" name="bookingId" value="<%=userBooking.getBookingId()%>"> 
+								<%System.out.println(userBooking.getBookingId()); %>
+							<input type="hidden" name="centerId" value="<%=userBooking.getServiceCenterId()%>">
+								<%System.out.println(userBooking.getServiceCenterId()); %> 
+							
 							<button type="submit" class="btn btn-primary">Submit</button>
 						</form>
 					</td>

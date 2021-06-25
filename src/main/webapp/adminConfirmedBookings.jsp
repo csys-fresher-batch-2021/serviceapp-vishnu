@@ -44,7 +44,7 @@
 					List<ArrayList<String>> listOfBookings = BookingDetailsService.showAllUserBookings();
 
 					for (ArrayList<String> bookings : listOfBookings) {
-						if (bookings.get(6).equals("CONFIRMED") && bookings.get(9).equalsIgnoreCase("In Progress")) {
+						if (bookings.get(6).equals("CONFIRMED") ) {
 					%>
 
 					<tr>

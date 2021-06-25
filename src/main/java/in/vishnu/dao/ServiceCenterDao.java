@@ -24,7 +24,7 @@ public class ServiceCenterDao {
 
 		try {
 			connection = ConnectionUtil.getConnection();
-			String sql = "INSERT INTO service_centers_db(center_name, location)VALUES(?,?)";
+			String sql = "INSERT INTO service_centers(center_name, location)VALUES(?,?)";
 			pst = connection.prepareStatement(sql);
 			pst.setString(1, serviceCenter.getCenterName());
 			pst.setString(2, serviceCenter.getLocation());
@@ -50,7 +50,7 @@ public class ServiceCenterDao {
 		PreparedStatement pst = null;
 		try {
 			connection = ConnectionUtil.getConnection();
-			String sql = "DELETE FROM service_center_db WHERE center_name=? AND location=?";
+			String sql = "DELETE FROM service_centers WHERE center_name=? AND location=?";
 			pst = connection.prepareStatement(sql);
 			pst.setString(1, serviceCenter.getCenterName());
 			pst.setString(2, serviceCenter.getLocation());
@@ -73,7 +73,7 @@ public class ServiceCenterDao {
 		List<ServiceCenter> listOfServiceCenters = new ArrayList<>();
 		try {
 			connection = ConnectionUtil.getConnection();
-			String sql = "SELECT center_name, location FROM service_centers_db";
+			String sql = "SELECT center_name, location FROM service_centers";
 			pst = connection.prepareStatement(sql);
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
