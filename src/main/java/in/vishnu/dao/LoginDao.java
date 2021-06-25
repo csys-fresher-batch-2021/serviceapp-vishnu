@@ -25,7 +25,8 @@ public class LoginDao {
 		PreparedStatement pst = null;
 		try {
 			connection = ConnectionUtil.getConnection();
-			String sql = "SELECT * FROM user_details WHERE email=? AND password=?";
+			String sql = "SELECT first_name, last_name, contact, email, password, user_id "
+					+ "FROM user_details WHERE email=? AND password=?";
 			pst = connection.prepareStatement(sql);
 			pst.setString(1, email);
 			pst.setString(2, password);
@@ -94,7 +95,8 @@ public class LoginDao {
 		PreparedStatement pst = null;
 		try {
 			connection = ConnectionUtil.getConnection();
-			String sql = "SELECT * FROM admin_details WHERE admin_email=? AND admin_password=?";
+			String sql = "SELECT s_no, admin_email, admin_password "
+					+ "FROM admin_details WHERE admin_email=? AND admin_password=?";
 			pst = connection.prepareStatement(sql);
 			pst.setString(1, email);
 			pst.setString(2, password);
