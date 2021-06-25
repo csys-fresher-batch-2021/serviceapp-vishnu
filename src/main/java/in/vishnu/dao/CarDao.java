@@ -69,7 +69,7 @@ public class CarDao {
 		List<String> listOfCars = new ArrayList<>();
 		try {
 			connection = ConnectionUtil.getConnection();
-			String sql = ("SELECT * FROM cars");
+			String sql = ("SELECT available_cars FROM cars");
 			pst = connection.prepareStatement(sql);
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {

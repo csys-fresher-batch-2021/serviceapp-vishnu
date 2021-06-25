@@ -48,7 +48,7 @@ public class ServicesDAO {
 		PreparedStatement pst = null;
 		try {
 			connection = ConnectionUtil.getConnection();
-			String sql = "SELECT * FROM services";
+			String sql = "SELECT service_name, service_charge FROM services";
 			pst = connection.prepareStatement(sql);
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {

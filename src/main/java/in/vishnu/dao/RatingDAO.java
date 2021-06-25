@@ -51,7 +51,8 @@ public class RatingDAO {
 		List<ServiceCenter> listOfServiceCenters = new ArrayList<>();
 		try {
 			connection = ConnectionUtil.getConnection();
-			String sql = "select sc.*, avg(rating)::numeric(10,1) as ratings, count(rating) as no_of_ratings\r\n"
+			String sql = "select sc.id, sc.center_name, sc.location, "
+					+ "avg(rating)::numeric(10,1) as ratings, count(rating) as no_of_ratings\r\n"
 					+ "from service_centers sc, service_ratings sr\r\n" + "where sc.id = sr.service_center_id \r\n"
 					+ "group by sr.service_center_id, sc.id order by ratings DESC;";
 			pst = connection.prepareStatement(sql);
