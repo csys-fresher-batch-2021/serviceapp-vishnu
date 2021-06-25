@@ -43,6 +43,9 @@ service_id serial primary key,
 	service_charge int not null
 );
 
+insert into services(service_id,service_name, service_charge)values(DEFAULT,'CAR MACHINE POLISH', 3999);
+insert into services(service_id,service_name, service_charge)values(DEFAULT,'DENT REMOVAL', 1999);
+insert into services(service_id,service_name, service_charge)values(DEFAULT,'OIL SERVICE', 2999);
 
 ---booking details table------
 ---------------------------------
@@ -58,9 +61,6 @@ booking_id serial primary key,
 	booking_time time default current_time
 	delivery_date varchar(35)
 );
-insert into services(service_id,service_name, service_charge)values(nextval('service_id_sequence'),'CAR MACHINE POLISH', 3999);
-insert into services(service_id,service_name, service_charge)values(nextval('service_id_sequence'),'DENT REMOVAL', 1999);
-insert into services(service_id,service_name, service_charge)values(nextval('service_id_sequence'),'OIL SERVICE', 2999);
 
 
 ------service center table-----
