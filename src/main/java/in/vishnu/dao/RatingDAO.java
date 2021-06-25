@@ -14,118 +14,30 @@ import in.vishnu.util.ConnectionUtil;
 public class RatingDAO {
 
 	/**
-	 * This method is used to update five star ratings
+	 * This method is used to update rating
 	 * 
-	 * @param centerName
+	 * @param centerId
+	 * @param bookingId
+	 * @param rating
 	 */
-	public void updateFiveStarRating(String centerName) {
+	public void updateRating(int centerId, int bookingId, int rating) {
 		Connection connection = null;
 		PreparedStatement pst = null;
+
 		try {
 			connection = ConnectionUtil.getConnection();
-			String sql = "UPDATE service_centers_db SET five_star=five_star+1 WHERE center_name = ?";
+			String sql = "INSERT INTO service_ratings(id, service_center_id, booking_detail_id,"
+					+ "rating, created_date)VALUES(DEFAULT,?,?,?,DEFAULT)";
 			pst = connection.prepareStatement(sql);
-			pst.setString(1, centerName);
+			pst.setInt(1, centerId);
+			pst.setInt(2, bookingId);
+			pst.setInt(3, rating);
 			pst.executeUpdate();
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-			throw new DbException("Unable to update");
+			throw new DbException("Unable to update rating");
 		} finally {
 			ConnectionUtil.close(pst, connection);
 		}
-
-	}
-
-	/**
-	 * This method is used to update four star rating
-	 * 
-	 * @param centerName
-	 */
-	public void updateFourStarRating(String centerName) {
-		Connection connection = null;
-		PreparedStatement pst = null;
-		try {
-			connection = ConnectionUtil.getConnection();
-			String sql = "UPDATE service_centers_db SET four_star=four_star+1 WHERE center_name = ?";
-			pst = connection.prepareStatement(sql);
-			pst.setString(1, centerName);
-			pst.executeUpdate();
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-			throw new DbException("Unable to rate");
-		} finally {
-			ConnectionUtil.close(pst, connection);
-		}
-
-	}
-
-	/**
-	 * This method is used to update three star rating
-	 * 
-	 * @param centerName
-	 */
-	public void updateThreeStarRating(String centerName) {
-		Connection connection = null;
-		PreparedStatement pst = null;
-		try {
-			connection = ConnectionUtil.getConnection();
-			String sql = "UPDATE service_centers_db SET three_star=three_star+1 WHERE center_name = ?";
-			pst = connection.prepareStatement(sql);
-			pst.setString(1, centerName);
-			pst.executeUpdate();
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-			throw new DbException("Unable to update three star");
-		} finally {
-			ConnectionUtil.close(pst, connection);
-		}
-
-	}
-
-	/**
-	 * This method is used to update two star rating
-	 * 
-	 * @param centerName
-	 */
-	public void updateTwoStarRating(String centerName) {
-		Connection connection = null;
-		PreparedStatement pst = null;
-		try {
-			connection = ConnectionUtil.getConnection();
-			String sql = "UPDATE service_centers_db SET two_star=two_star+1 WHERE center_name = ?";
-			pst = connection.prepareStatement(sql);
-			pst.setString(1, centerName);
-			pst.executeUpdate();
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-			throw new DbException("Unable to update two star");
-		} finally {
-			ConnectionUtil.close(pst, connection);
-		}
-
-	}
-
-	/**
-	 * This method is used to update one star rating
-	 * 
-	 * @param centerName
-	 */
-	public void updateOneStarRating(String centerName) {
-		Connection connection = null;
-		PreparedStatement pst = null;
-		try {
-			connection = ConnectionUtil.getConnection();
-			String sql = "UPDATE service_centers_db SET one_star=one_star+1 WHERE center_name = ?";
-			pst = connection.prepareStatement(sql);
-			pst.setString(1, centerName);
-			pst.executeUpdate();
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-			throw new DbException("Unable to update");
-		} finally {
-			ConnectionUtil.close(pst, connection);
-		}
-
 	}
 
 	/**
@@ -139,17 +51,16 @@ public class RatingDAO {
 		List<ServiceCenter> listOfServiceCenters = new ArrayList<>();
 		try {
 			connection = ConnectionUtil.getConnection();
-			String sql = "SELECT center_name, location, (five_star*5+four_star*4+three_star*3+two_star*2+one_star)"
-					+ "/(five_star+four_star+three_star+two_star+one_star)"
-					+ "AS rating, (five_star+four_star+three_star+two_star+one_star) AS responses "
-					+ "FROM service_centers_db ORDER BY rating DESC";
+			String sql = "select sc.*, avg(rating)::numeric(10,1) as ratings, count(rating) as no_of_ratings\r\n"
+					+ "from service_centers sc, service_ratings sr\r\n" + "where sc.id = sr.service_center_id \r\n"
+					+ "group by sr.service_center_id, sc.id order by ratings DESC;";
 			pst = connection.prepareStatement(sql);
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
 				String serviceCenter = rs.getString("center_name");
 				String location = rs.getString("location");
-				float rating = rs.getFloat("rating");
-				int responses = rs.getInt("responses");
+				float rating = rs.getFloat("ratings");
+				int responses = rs.getInt("no_of_ratings");
 				ServiceCenter newCenter = new ServiceCenter(serviceCenter, location, rating, responses);
 				listOfServiceCenters.add(newCenter);
 			}

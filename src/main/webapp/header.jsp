@@ -47,8 +47,15 @@ String registrationNumber = (String) session.getAttribute("registrationNumber");
 
 				<li class="nav-item"><a class="nav-link" href="services.jsp">Services</a>
 				</li>
+				<%if(role!=null){ %>
 				<li class="nav-item"><a class="nav-link"
-					href="serviceCenterRatings.jsp">Service Centers</a></li>
+					href="serviceCenters.jsp">Service Centers</a></li>
+					<%}if(user!=null || user==null && role==null){ %>
+					<li class="nav-item"><a class="nav-link"
+					href="serviceCenters.jsp">Service Centers</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="serviceCenterRatings.jsp">Service Center Ratings</a></li>
+					<%} %>
 
 			</ul>
 			<%

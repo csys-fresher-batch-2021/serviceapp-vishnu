@@ -34,6 +34,19 @@ insert into cars(available_cars)values('MARUTHI CELERIO')
 insert into cars(available_cars)values('MARUTHI S-CROSS')
 insert into cars(available_cars)values('MARUTHI VITARA BREZZA')
 
+
+
+-----services table--------
+create table services(
+service_id serial primary key,
+	service_name varchar(50) not null,
+	service_charge int not null
+);
+
+insert into services(service_id,service_name, service_charge)values(DEFAULT,'CAR MACHINE POLISH', 3999);
+insert into services(service_id,service_name, service_charge)values(DEFAULT,'DENT REMOVAL', 1999);
+insert into services(service_id,service_name, service_charge)values(DEFAULT,'OIL SERVICE', 2999);
+
 ---booking details table------
 ---------------------------------
 create table booking_details(
@@ -46,33 +59,31 @@ booking_id serial primary key,
 	booking_status varchar(50),
 	booking_date date default current_date,
 	booking_time time default current_time
+	delivery_date varchar(35)
 );
-create sequence booking_id_sequence start 1001 increment 1;
 
 
------services table--------
-create table services(
-service_id serial primary key,
-	service_name varchar(50) not null,
-	service_charge int not null
-);
-create sequence service_id_sequence start 100 increment 1 owned by services.service_id;
-insert into services(service_id,service_name, service_charge)values(nextval('service_id_sequence'),'CAR MACHINE POLISH', 3999);
-insert into services(service_id,service_name, service_charge)values(nextval('service_id_sequence'),'DENT REMOVAL', 1999);
-insert into services(service_id,service_name, service_charge)values(nextval('service_id_sequence'),'OIL SERVICE', 2999);
-
-
-----------service center table----------
-----------------------------------------
-create table service_centers_db(
+------service center table-----
+-----------------------------------
+create table service_centers(
+    id serial primary key,
 	center_name varchar(100),
-	location varchar(50),
-	five_star int not null default 0,
-	four_star int not null default 0,
-	three_star int not null default 0,
-	two_star int not null default 0,
-	one_star int not null default 1
+	location varchar(50),	
+	unique (center_name,location)
+	);
+insert into service_centers(center_name, location)values('auto barrack service station', 'chennai'); 
+insert into service_centers(center_name, location)values('automech car service station', 'chennai');
+insert into service_centers(center_name, location)values('abcd car service center', 'chennai');
+
+
+----service rating table------
+------------------------------
+create table service_ratings(
+id serial primary key,
+service_center_id int not null,
+booking_detail_id int not null,
+rating int not null,
+created_date timestamp not null default current_timestamp,
+foreign key ( service_center_id) references services_centers(id),
+foreign key ( booking_detail_id) references booking_details(id)
 );
-insert into service_centers_db(center_name, location)values('auto barrack service station', 'chennai'); 
-insert into service_center_db(center_name, location)values('automech car service station', 'chennai');
-insert into service_center_db(center_name, location)values('abcd car service center', 'chennai');

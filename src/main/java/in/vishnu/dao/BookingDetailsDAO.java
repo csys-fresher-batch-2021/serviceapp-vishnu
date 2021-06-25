@@ -4,14 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import in.vishnu.exception.DbException;
 import in.vishnu.model.BookingDetails;
-
 import in.vishnu.model.UserBooking;
 import in.vishnu.util.ConnectionUtil;
 
@@ -28,8 +24,7 @@ public class BookingDetailsDAO {
 		try {
 			connection = ConnectionUtil.getConnection();
 			String sql = "INSERT INTO booking_details(booking_id, email_id, car_name, "
-					+ "registration_no, service_type, service_center, booking_status)"
-					+ "VALUES(NEXTVAL('booking_id_sequence'), ?,?,?,?,?,?)";
+					+ "registration_no, service_type, service_center, booking_status, delivery_date)VALUES(DEFAULT, ?,?,?,?,?,?,?)";
 			pst = connection.prepareStatement(sql);
 			pst.setString(1, booking.getEmailId());
 			pst.setString(2, booking.getCarName());
@@ -37,6 +32,7 @@ public class BookingDetailsDAO {
 			pst.setString(4, booking.getServiceType());
 			pst.setString(5, booking.getServiceCenter());
 			pst.setString(6, "CONFIRMED");
+			pst.setString(7,"IN PROGRESS");
 			pst.executeUpdate();
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
@@ -58,24 +54,29 @@ public class BookingDetailsDAO {
 		List<UserBooking> newList = new ArrayList<>();
 		try {
 			connection1 = ConnectionUtil.getConnection();
-			String sql = "SELECT car_name, registration_no, service_type, services.service_charge as charge, "
+			String sql = "SELECT  booking_id, car_name, registration_no, service_type, "
+					+ "services.service_charge as charge, service_centers.id as service_center_id, "
 					+ "service_center, booking_status, booking_date, delivery_date FROM booking_details "
 					+ "INNER JOIN services ON booking_details.service_type = services.service_name "
+					+ "INNER JOIN service_centers ON SPLIT_PART(booking_details.service_center,',',1)"
+					+ " LIKE service_centers.center_name "
 					+ "WHERE email_id=? ORDER BY booking_id ASC";
+
 			pst1 = connection1.prepareStatement(sql);
 			pst1.setString(1, sessionEmail);
 			ResultSet rs = pst1.executeQuery();
 			while (rs.next()) {
-				String carName = rs.getString("car_name");
-				String registrationNumber = rs.getString("registration_no");
-				String serviceType = rs.getString("service_type");
-				int serviceCharge = rs.getInt("charge");
-				String serviceCenter = rs.getString("service_center");
-				String bookingStatus = rs.getString("booking_status");
-				LocalDate date = rs.getDate("booking_date").toLocalDate();
-				String deliveryDate = rs.getString("delivery_date");
-				UserBooking newBooking = new UserBooking(carName, registrationNumber, serviceType, serviceCharge,
-						serviceCenter, bookingStatus, date, deliveryDate);
+				UserBooking newBooking = new UserBooking();
+				newBooking.setBookingId(rs.getInt("booking_id"));
+				newBooking.setCarName(rs.getString("car_name"));
+				newBooking.setRegistrationNumber(rs.getString("registration_no"));
+				newBooking.setServiceType(rs.getString("service_type"));
+				newBooking.setServiceCharge(rs.getInt("charge"));
+				newBooking.setServiceCenterId(rs.getInt("service_center_id"));
+				newBooking.setServiceCenter(rs.getString("service_center"));
+				newBooking.setBookingStatus(rs.getString("booking_status"));
+				newBooking.setDate(rs.getDate("booking_date").toLocalDate());
+				newBooking.setDeliveryDate(rs.getString("delivery_date"));
 				newList.add(newBooking);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
@@ -99,7 +100,9 @@ public class BookingDetailsDAO {
 		PreparedStatement pst = null;
 		try {
 			connection = ConnectionUtil.getConnection();
-			String sql = "SELECT * FROM booking_details ORDER BY booking_id DESC";
+			String sql = "SELECT booking_id, email_id, car_name, registration_no, service_type, "
+					+ "service_center, booking_status, booking_date, booking_time, delivery_date "
+					+ " FROM booking_details ORDER BY booking_id DESC";
 			pst = connection.prepareStatement(sql);
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {

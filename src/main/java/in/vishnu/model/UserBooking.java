@@ -3,10 +3,13 @@ package in.vishnu.model;
 import java.time.LocalDate;
 
 public class UserBooking {
+
+	private int bookingId;
 	private String carName;
 	private String registrationNumber;
 	private String serviceType;
 	private int serviceCharge;
+	private int serviceCenterId;
 	private String serviceCenter;
 	private String bookingStatus;
 	private LocalDate date;
@@ -16,17 +19,12 @@ public class UserBooking {
 		super();
 	}
 
-	public UserBooking(String carName, String registrationNumber, String serviceType, int serviceCharge,
-			String serviceCenter, String bookingStatus, LocalDate date, String deliveryDate) {
-		super();
-		this.carName = carName;
-		this.registrationNumber = registrationNumber;
-		this.serviceType = serviceType;
-		this.serviceCharge = serviceCharge;
-		this.serviceCenter = serviceCenter;
-		this.bookingStatus = bookingStatus;
-		this.date = date;
-		this.deliveryDate = deliveryDate;
+	public int getBookingId() {
+		return bookingId;
+	}
+
+	public void setBookingId(int bookingId) {
+		this.bookingId = bookingId;
 	}
 
 	public String getCarName() {
@@ -59,6 +57,14 @@ public class UserBooking {
 
 	public void setServiceCharge(int serviceCharge) {
 		this.serviceCharge = serviceCharge;
+	}
+
+	public int getServiceCenterId() {
+		return serviceCenterId;
+	}
+
+	public void setServiceCenterId(int serviceCenterId) {
+		this.serviceCenterId = serviceCenterId;
 	}
 
 	public String getServiceCenter() {
